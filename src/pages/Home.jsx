@@ -1,0 +1,103 @@
+
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/Home.css";
+import SampleIcon from "../assets/samplIcon.png";
+
+function Home() {
+  const navigate = useNavigate();
+
+  // Dynamic User
+  const user = {
+    name: "Prashanth Varma",
+    role: "Artist",
+    profilePic: SampleIcon,
+  };
+
+  // Dynamic Cards Data
+  const cardsData = [
+    {
+      value: "$300.29",
+      meta: "Account Balance <br/> Approx ₹25,093.12",
+    },
+    {
+      value: "$300.29",
+      meta: "May 2024 <br/> Orpin Music",
+    },
+    {
+      value: "$300.29",
+      meta: "May 23, 2024 <br/> ₹25,093.12",
+    },
+  ];
+
+  // Dynamic Releases
+  const releases = [
+    { title: "Dangerous Days", subtitle: "2014 – Single", img: SampleIcon },
+    { title: "Night Sky", subtitle: "2020 – Album", img: SampleIcon },
+    { title: "Lost Dreams", subtitle: "2019 – EP", img: SampleIcon },
+    { title: "Ocean Waves", subtitle: "2022 – Single", img: SampleIcon },
+    { title: "Skyline", subtitle: "2023 – Album", img: SampleIcon },
+  ];
+
+  return (
+    <div className="home-container">
+      {/* Greeting Card */}
+      <div className="greeting-card">
+          <img src={user.profilePic} alt="Profile" className="profile-card-pic" />
+          <div className="greeting-info">
+            <h1 className="greeting-name">{user.name}</h1>
+            <p className="greeting-role">{user.role}</p>
+          </div>
+        <button
+        className="new-release-button"
+        onClick={() => navigate("/create-release")}
+        >
+          Create Release
+        </button>
+
+
+      </div>
+
+      {/* Dynamic Cards Section */}
+      <div className="cards">
+        {cardsData.map((card, idx) => (
+          <div key={idx} className="card">
+            <div className="value">{card.value}</div>
+            <div
+              className="meta"
+              dangerouslySetInnerHTML={{ __html: card.meta }}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Releases Section */}
+      <div className="releases-header">
+        <h2>Recent Releases</h2>
+          <button
+            className="view-all-btn"
+            onClick={() => navigate("/catalog?tab=releases")}
+          >
+            View All
+          </button>
+      </div>
+
+      <div className="releases-container">
+        {releases.map((release, i) => (
+          <div key={i} className="release-card">
+            <div className="album-art">
+              <img src={release.img} alt={release.title} />
+              <div className="overlay">
+                <button className="play-btn">▶</button>
+              </div>
+            </div>
+            <div className="title">{release.title}</div>
+            <div className="subtitle">{release.subtitle}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Home;

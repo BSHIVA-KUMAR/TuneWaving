@@ -1,0 +1,204 @@
+/* ============================= */
+/* Outer Container */
+.data-table-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  height: 600px;
+  padding: 20px;         /* gap around table wrapper */
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* ============================= */
+/* Table Wrapper (scroll area) */
+.table-wrapper {
+  flex: 1;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fdfdfd;
+  padding-right: 16px; /* spacing on right */
+}
+
+/* ============================= */
+/* Table */
+.data-table {
+  width: 100%;
+  min-width: 1200px; /* enable horizontal scroll */
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+}
+
+/* ============================= */
+/* Sticky Header */
+.data-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f9fafb;
+  z-index: 5;
+}
+
+/* Sticky First Column (checkbox) */
+.data-table th:first-child,
+.data-table td:first-child {
+  position: sticky;
+  left: 0;
+  background: #fff;
+  z-index: 4;
+  box-shadow: 2px 0 4px rgba(0,0,0,0.05);
+  width: 40px;
+}
+
+/* Sticky Second Column (title) */
+.data-table th:nth-child(2),
+.data-table td:nth-child(2) {
+  position: sticky;
+  left: 40px; /* width of checkbox col */
+  background: #fff;
+  z-index: 4;
+  box-shadow: 2px 0 4px rgba(0,0,0,0.03);
+}
+
+/* ============================= */
+/* Row States */
+.data-table tbody tr.selected {
+  background-color: #ebf8ff;
+}
+
+.data-table tbody tr.selected:hover {
+  background-color: rgba(18, 120, 187, 0.25) !important;
+}
+
+/* ============================= */
+/* Cell Custom Content */
+.title-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.track-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+}
+
+.label-badge {
+  background: #edf2f7;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* ============================= */
+/* Custom Checkbox Styling */
+.data-table input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+
+
+.data-table input[type="checkbox"]:hover {
+  border-color: #1278bb;
+}
+
+.data-table input[type="checkbox"]:checked {
+  border-color: #1278bb;
+  background-color: #fff;
+}
+
+.data-table input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  background: #1278bb;
+  border-radius: 4px;
+}
+
+.data-table input[type="checkbox"]:indeterminate::after {
+  content: "×";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #1278bb;
+}
+
+/* ============================= */
+/* Pagination */
+.pagination-container {
+  display: flex;
+  flex-direction: column; /* info on top, buttons below */
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  background: #f9f9f9;
+  border-top: 1px solid #ddd;
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+}
+
+.pagination-info {
+  margin-bottom: 8px;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pagination-btn {
+  width: 30px;
+  height: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 4px;
+}
+
+.pagination-btn.active {
+  background-color: #1878bb;
+  color: white;
+}
+
+.pagination-arrow {
+  font-weight: bold;
+}
+
+

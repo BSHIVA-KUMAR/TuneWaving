@@ -192,7 +192,7 @@ function DataTable({
               <tr key={item.id} className={selectedItems.has(item.id) ? 'selected' : ''}>
                 {showCheckboxes && (
                   <td className="checkbox-col">
-                    <input type="checkbox" checked={selectedItems.has(item.id)} onChange={() => handleItemSelect(item.id)} />
+                    <input type="checkbox" checked={selectedItems.has(item.id)} onChange={() => handleItemSelect(item.id)}  />
                   </td>
                 )}
                 {tableColumns.map(column => (
@@ -210,7 +210,7 @@ function DataTable({
         <div className="pagination-container">
           <div className="pagination-info">
             Showing {startIndex + 1}-{Math.min(startIndex + itemsPerPage, sortedData.length)} of {sortedData.length} items
-            {selectedItems.size > 0 && <span> • {selectedItems.size} selected</span>}
+            {selectedItems.size > 0 && <span className="selected-count-footer"> • {selectedItems.size} selected</span>}
           </div>
           <div className="pagination-buttons">{renderPaginationButtons()}</div>
         </div>

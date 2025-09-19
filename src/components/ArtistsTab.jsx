@@ -1,13 +1,15 @@
 
 import React, { useState } from "react";
 import DataTable from "./DataTable";
+import GridView from "./GridView";
 import CopyButton from "./CopyButton";
 import "../styles/ArtistsTab.css";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function ArtistsTab() {
-  const [searchTerm, setSearchTerm] = useState("");
+
+function ArtistsTab({searchTerm,showMode}) {
+
 
   // Sample data for artists
   const artistsData = [
@@ -101,19 +103,35 @@ function ArtistsTab() {
     }
   ];
 
-  const filteredData = artistsData.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.legalName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.artistId.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredData = artistsData.filter(item =>
+  //   item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //   item.legalName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //   item.artistId.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
+  // return (
+  //   <div className="artists-tab">
+  //     <DataTable 
+  //       data={filteredData}
+  //       columns={columns}
+  //       // itemsPerPage={12}
+  //     />
+  //   </div>
+  // );
+ const filteredData = artistsData.filter(
+  (item) =>
+    item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+    item.legalName.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+    item.artistId.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+);
+
+
 
   return (
     <div className="artists-tab">
-      <DataTable 
-        data={filteredData}
-        columns={columns}
-        // itemsPerPage={12}
-      />
+      {
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+      } 
     </div>
   );
 }

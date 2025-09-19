@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate} from "react-router-dom";
 import "../styles/TrackDetails.css";
 
 const TrackDetails = () => {
@@ -9,7 +10,9 @@ const TrackDetails = () => {
   const [crbtName, setCrbtName] = useState("");
   const [crbtTime, setCrbtTime] = useState("00:00:00");
   const [isrcOption, setIsrcOption] = useState("no");
+  const [showPopup, setShowPopup] = useState(false);
   const [isrcCode, setIsrcCode] = useState("");
+  const [explicitStatus, setExplicitStatus] = useState("");
 
   // Add handlers for adding to arrays
 
@@ -26,10 +29,67 @@ const TrackDetails = () => {
     console.log("Track Details:", trackData);
     // You can send trackData to your backend or use as needed
   };
+  const handleConfirmLeave = () => {
+    navigate("/dashboard");
+  };
+
+  const handleCancelLeave = () => {
+    setShowPopup(false);
+  };
+
+  const navigate = useNavigate()
+
+  const handleCloseClick = () => {
+    setShowPopup(true);
+  };
+
+  const handleSaveAndContinue = () => {
+    const trackData = {
+      lyricsLanguage,
+      lyricsLanguageOption,
+      catalogId,
+      crbtName,
+      crbtTime,
+      isrcOption,
+      isrcCode,
+      explicitStatus,
+    };
+    // Save to local storage (append if already exists)
+    const tracks = JSON.parse(localStorage.getItem("tracks") || "[]");
+    tracks.push(trackData);
+    localStorage.setItem("tracks", JSON.stringify(tracks));
+    navigate("/upload-tracks");
+  };
 
   return (
     <div className="track-details-container">
       <h2 className="form-title">Track Details</h2>
+
+
+         {/* {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <p>Do you want to leave this page?</p>
+            <div className="popup-buttons">
+              <button className="yes-button" onClick={handleConfirmLeave}>
+                Yes
+              </button>
+              <button className="no-button" onClick={handleCancelLeave}>
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )} */}
+
+       {/* <span
+          className="close-button"
+          onClick={handleCloseClick}
+          style={{ fontSize: "24px", cursor: "pointer" }}
+        >
+          cancle
+        </span> */}
+
       <div className="form-card">
         {/* Title Section */}
         {/* <div className="form-section">
@@ -70,6 +130,7 @@ const TrackDetails = () => {
          <div className="language-container">
               <div className="language-box">
                 <h3 className="section-title">Language of Lyrics</h3>
+
                 <div className="radio-group" style={{ gap: "12px" }}>
                   <label>
                     <input
@@ -108,6 +169,63 @@ const TrackDetails = () => {
                 )}
               </div>
             </div>
+
+             {lyricsLanguageOption === "Instrumental" && (
+          <div
+            className="language-container"
+            style={{
+              flexDirection: "column",
+              padding: "20px",
+              gap: "15px",
+              marginTop: "20px",
+            }}
+          >
+            <div className="language-box">
+              <div className="section-title">Explicit Content *</div>
+
+              <div className="radio-group" style={{ flexDirection: "column", gap: "12px" }}>
+                <label>
+                  <input
+                    type="radio"
+                    name="explicitStatus"
+                    value="Explicit"
+                    checked={explicitStatus === "Explicit"}
+                    onChange={() => setExplicitStatus("Explicit")}
+                  />
+                  Explicit
+                </label>
+                {explicitStatus === "Explicit" && (
+                  <p style={{ fontSize: "13px", color: "#555", marginLeft: "20px", marginTop: "4px" }}>
+                    The track lyrics or title include explicit language (such as drug references, sexual, violent or discriminatory language, swearing etc.) not suitable for children.
+                  </p>
+                )}
+
+                <label>
+                  <input
+                    type="radio"
+                    name="explicitStatus"
+                    value="Not Explicit"
+                    checked={explicitStatus === "Not Explicit"}
+                    onChange={() => setExplicitStatus("Not Explicit")}
+                  />
+                  Not Explicit
+                </label>
+                {explicitStatus === "Not Explicit" && (
+                  <p style={{ fontSize: "13px", color: "#555", marginLeft: "20px", marginTop: "4px" }}>
+                    The track does NOT include any explicit language in lyrics or title.
+                  </p>
+                )}
+              </div>
+
+              <p
+                className="explicit-note"
+                style={{ marginTop: "12px", fontSize: "13px", color: "#555" }}
+              >
+                If your track contains explicit content, you MUST mark it as “Explicit”. Otherwise, your release may be rejected when you attempt to distribute it.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Artists Section */}
         {/* <div className="form-section">
@@ -301,7 +419,9 @@ const TrackDetails = () => {
 
         {/* Save Button */}
         <div className="form-actions">
-          <button className="save-btn" onClick={handleSave}>Save & Continue</button>
+          <button className="new-release-button" onClick={handleSaveAndContinue}>
+            Save & Continue
+          </button>
         </div>
       </div>
     </div>

@@ -5,9 +5,9 @@ import CopyButton from "./CopyButton";
 import "../styles/TracksTab.css";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
+import GridView from "./GridView";
+function TracksTab({searchTerm, showMode}) {
 
-function TracksTab() {
-  const [searchTerm, setSearchTerm] = useState("");
 
   const tracksData = [
     { id: 1, title: "Shape of You", trackId: "TRK001", duration: "03:54", isrc: "US-UM7-17-00001", image: "/src/assets/samplIcon.png" },
@@ -41,13 +41,19 @@ function TracksTab() {
     }
   ];
 
-  const filteredData = tracksData.filter(item =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredData = tracksData.filter(
+    (item) =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase()) 
   );
+  console.log("Filtered Data:", filteredData);
 
-  return <DataTable data={filteredData} columns={columns} 
-  // itemsPerPage={12}
-   />;
+  return (
+    <div className="tracks-tab">
+      {
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+      } 
+    </div>
+  );
 }
 
 export default TracksTab;

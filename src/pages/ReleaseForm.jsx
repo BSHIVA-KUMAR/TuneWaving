@@ -26,7 +26,6 @@ const ReleaseForm = () => {
   return (
     <div className="release-container">
       <h2 className="title">Create A Store</h2>
-      <p className="step">04/05</p>
 
       <div className="card">
         <h3 className="stores-title">Stores</h3>

@@ -86,7 +86,7 @@ The beat(s) are 100% self-produced & Original`;
           <div><strong>Publishing rights:</strong> 2025 aBABAB</div>
           <div><strong>Original Release Date:</strong> 15/02/2025</div>
           <div><strong>ISRC Code:</strong> AA18079998989</div>
-          <div><strong>Stores:</strong> All Stores</div>
+          <div><strong>Stores:</strong> <button className="new-release-button" onClick={()=>navigate("/four-page")}>View Store</button></div>
           <div><strong>UPC Code:</strong> AA18079998989</div>
 
           <hr />
@@ -138,7 +138,7 @@ The beat(s) are 100% self-produced & Original`;
             </div>
           </div>
 
-          <button className="new-release-button" style={{marginLeft:"40%"}}>Submit</button>
+          <button className="new-release-button" onClick={()=>navigate("/")} style={{marginLeft:"40%"}}>Submit</button>
         </div>
       </div>
 
@@ -151,10 +151,10 @@ The beat(s) are 100% self-produced & Original`;
               <button className="new-release-button" onClick={handleConfirmLeave}>
                 Yes
               </button>
-              <button className="no-button" onClick={handleCancelLeave}>
+              <button className="btn-secondary" onClick={handleCancelLeave}>
                 No
               </button>
-              <button className="no-button" onClick={handleCancelLeave}>
+              <button className="btn-secondary" onClick={handleCancelLeave}>
                 Cancel
               </button>
             </div>

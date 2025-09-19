@@ -1,11 +1,11 @@
 
 import React, { useState } from "react";
 import DataTable from "./DataTable";
+import GridView from "./GridView";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function ProducersTab() {
-  const [searchTerm, setSearchTerm] = useState("");
+function ProducersTab({searchTerm,showMode}) {
 
   const producersData = [
     { id: 1, name: "Pritam", producerId: "PROD001", country: "India", image: "/src/assets/samplIcon.png" },
@@ -28,14 +28,23 @@ function ProducersTab() {
     { key: "country", label: "COUNTRY", sortable: true }
   ];
 
-  const filteredData = producersData.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.country.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
-  return <DataTable data={filteredData} columns={columns} 
-  // itemsPerPage={12} 
-  />;
+  const filteredData = producersData.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+        item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+      );
+
+      console.log("Search Term:", searchTerm);
+      console.log("Filtered Data:", filteredData);
+
+
+  return (
+    <div className="producers-tab">
+      {
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+      } 
+    </div>
+  );
 }
 
 export default ProducersTab;

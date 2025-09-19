@@ -1,12 +1,12 @@
 
 import React, { useState } from "react";
 import DataTable from "./DataTable";
+import GridView from "./GridView";
 import CopyButton from "./CopyButton";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function PerformersTab() {
-  const [searchTerm, setSearchTerm] = useState("");
+function PerformersTab({searchTerm,showMode}) {
 
   const performersData = [
     { id: 1, name: "Arijit Singh", performerId: "PER001", country: "India", isni: "0000000123456789", image: "/src/assets/samplIcon.png" },
@@ -51,14 +51,26 @@ function PerformersTab() {
     }
   ];
 
-  const filteredData = performersData.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.country.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredData = performersData.filter(item =>
+  //   item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //   item.country.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+  const filteredData = performersData.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+        item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+      );
 
-  return <DataTable data={filteredData} columns={columns} 
-  // itemsPerPage={12}
-   />;
+      console.log("Search Term:", searchTerm);
+      console.log("Filtered Data:", filteredData);
+
+
+  return (
+    <div className="performers-tab">
+      {
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+      } 
+    </div>
+  );
 }
 
 export default PerformersTab;

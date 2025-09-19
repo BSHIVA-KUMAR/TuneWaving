@@ -37,7 +37,7 @@
 .input-group {
   margin-bottom: 20px;
   display: flex;
-  width: auto;
+  width: fit-content;
   flex-direction: column;
   margin-left: 10%;
 }
@@ -280,7 +280,6 @@
 .localize-btn {
    background: #60a5fa;
   margin-bottom: 20px; /* Extra gap below Localize Your Release button */
-  margin-left: 40%;
 }
 
 

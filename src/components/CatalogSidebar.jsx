@@ -64,7 +64,7 @@ function CatalogSidebar({ activeTab, setActiveTab }) {
             className={activeTab === item.id ? "active" : ""}
             onClick={() => setActiveTab(item.id)}
           >
-            <img src={item.icon} alt={item.label} className="sidebar-icon" />
+            {/* <img src={item.icon} alt={item.label} className="sidebar-icon" /> */}
             {item.label}
           </li>
         ))}
@@ -78,7 +78,7 @@ function CatalogSidebar({ activeTab, setActiveTab }) {
             className={activeTab === item.id ? "active" : ""}
             onClick={() => setActiveTab(item.id)}
           >
-            <img src={item.icon} alt={item.label} className="sidebar-icon" />
+            {/* <img src={item.icon} alt={item.label} className="sidebar-icon" /> */}
             {item.label}
           </li>
         ))}

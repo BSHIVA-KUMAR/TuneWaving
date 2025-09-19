@@ -123,9 +123,16 @@ const UploadTracks = () => {
   // Receive metadata from previous step
   const releaseMetadata = location.state || {};
 
-  const [tracks, setTracks] = useState([]);
+  const [tracks, setTracks] = useState(() => {
+    return JSON.parse(localStorage.getItem("uploadedTracks") || "[]");
+  });
   const [draggedTrackIdx, setDraggedTrackIdx] = useState(null);
   const fileInputRef = useRef(null);
+
+  const saveTracksToStorage = (tracksArr) => {
+    setTracks(tracksArr);
+    localStorage.setItem("uploadedTracks", JSON.stringify(tracksArr));
+  };
 
   // Handle file upload
   const handleTrackUpload = (e) => {
@@ -141,16 +148,16 @@ const UploadTracks = () => {
     const audioURL = URL.createObjectURL(file);
     const audio = new Audio(audioURL);
     audio.onloadedmetadata = () => {
-      setTracks((prev) => [
-        ...prev,
-        {
-          id: Date.now(),
-          name: file.name,
-          format: file.type,
-          url: audioURL,
-          duration: audio.duration,
-        },
-      ]);
+      const newTrack = {
+        id: Date.now(),
+        name: file.name,
+        format: file.type,
+        url: audioURL,
+        duration: audio.duration,
+        metadata: {}, // for track details
+      };
+      const updatedTracks = [...tracks, newTrack];
+      saveTracksToStorage(updatedTracks);
     };
   };
 
@@ -163,12 +170,15 @@ const UploadTracks = () => {
   };
 
   const handleDelete = (id) => {
-    setTracks(tracks.filter((track) => track.id !== id));
+    const updatedTracks = tracks.filter((track) => track.id !== id);
+    saveTracksToStorage(updatedTracks);
   };
 
   // Navigate to Preview & Distribute page
   const handleNextStep = () => {
-    navigate("/four-page", {
+    // Clear uploadedTracks from localStorage
+    localStorage.removeItem("uploadedTracks");
+    navigate("/preview-distribute", {
       state: {
         ...releaseMetadata,
         tracks, // include uploaded tracks
@@ -199,8 +209,6 @@ const UploadTracks = () => {
   return (
     <div className="upload-container">
       <h2 className="title">upload Track</h2>
-
-      <div className="step">03/5</div>
 
       <div className="upload-box">
         <h3 className="tracks-heading">Tracks</h3>

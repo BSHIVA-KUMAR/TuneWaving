@@ -1,11 +1,11 @@
 
 import React, { useState } from "react";
 import DataTable from "./DataTable";
+import GridView from "./GridView";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function LabelsTab() {
-  const [searchTerm, setSearchTerm] = useState("");
+function LabelsTab({searchTerm,showMode}) {
 
   const labelsData = [
     { id: 1, name: "Sony Music", labelId: "LAB001", country: "Japan", image: "/src/assets/samplIcon.png" },
@@ -28,15 +28,21 @@ function LabelsTab() {
     { key: "labelId", label: "LABEL ID", sortable: true },
     { key: "country", label: "COUNTRY", sortable: true }
   ];
+    const filteredData = labelsData.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+        item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+      );
 
-  const filteredData = labelsData.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.country.toLowerCase().includes(searchTerm.toLowerCase())
+      console.log("Search Term:", searchTerm);
+      console.log("Filtered Data:", filteredData);
+
+  return (
+    <div className="labels-tab">
+      {
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+      } 
+    </div>
   );
-
-  return <DataTable data={filteredData} columns={columns}
-  //  itemsPerPage={12}
-    />;
 }
 
 export default LabelsTab;

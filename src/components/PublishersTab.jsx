@@ -1,12 +1,12 @@
 
 import React, { useState } from "react";
 import DataTable from "./DataTable";
+import GridView from "./GridView";
 import CopyButton from "./CopyButton";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function PublishersTab() {
-  const [searchTerm, setSearchTerm] = useState("");
+function PublishersTab({searchTerm,showMode}) {
 
   const publishersData = [
     {
@@ -118,17 +118,21 @@ function PublishersTab() {
     }
   ];
 
-  const filteredData = publishersData.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.country.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+
+  const filteredData = publishersData.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+        item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+      );
+
+      console.log("Search Term:", searchTerm);
+      console.log("Filtered Data:", filteredData);
+
 
   return (
     <div className="publishers-tab">
-      <DataTable data={filteredData} columns={columns} 
-      // itemsPerPage={12}
-       />
+      {
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+      } 
     </div>
   );
 }

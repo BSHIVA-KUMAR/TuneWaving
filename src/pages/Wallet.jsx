@@ -19,7 +19,7 @@ function Wallet() {
 
         {/* Top Bar */}
         <div className="wallet-header">
-          <h2>Withdraw Request</h2>
+          <h2>Wallet</h2>
           <button className="close-btn" onClick={handleCloseClick}>×</button>
         </div>
 

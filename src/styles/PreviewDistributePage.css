@@ -176,23 +176,12 @@
 }
 
 /* Cancel Button should look like Add Link / Attach File Buttons */
-.cancel-button {
-  padding: 12px 24px; /* Same as Add Link / Attach File buttons */
-  font-size: 15px;    /* Same as Add Link / Attach File buttons */
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background: linear-gradient(90.61deg, #1278bb 4.69%, #13a89e 103.09%);
-  color: white;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(18, 120, 187, 0.3);
-  transition: background 0.3s ease, transform 0.2s ease;
-}
+/* s */
 
-.cancel-button:hover {
+/* .cancel-button:hover {
   transform: translateY(-2px);
   background: linear-gradient(90.61deg, #0f5e99 4.69%, #0fa387 103.09%);
-}
+} */
 
 
 /* Attachments List */

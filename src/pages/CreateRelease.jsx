@@ -35,6 +35,8 @@ function CreateRelease() {
   // State to control second dropdown visibility
   const [showSecondDropdown, setShowSecondDropdown] = useState(false);
   const [showthirdDropdown,setthirdDropDown] = useState(false)
+  const [originalDate,setOriginalDate] = useState("")
+  const [digitalDate,setDigitalDate] = useState("")
 
   const [fileError, setFileError] = useState(""); // Add this state
 
@@ -69,7 +71,7 @@ function CreateRelease() {
 
       {/* Step 1 */}
       <div className="section">
-        <h3>Step 1: Enter Release Details</h3>
+        <h3>Enter Release Details</h3>
 
         <div className="input-group">
           <label htmlFor="title" >Release Title <span style={{color:"red"}}>*</span> </label>
@@ -85,7 +87,7 @@ function CreateRelease() {
 
         <span></span>
 
-        <button className="btn-secondary" style={{marginLeft:"50%"}} onClick={() => setShowLocalizeModal(true)}>
+        <button className="btn-secondary" style={{marginLeft:"140px"}} onClick={() => setShowLocalizeModal(true)}>
           Localize Your Release
         </button>
         
@@ -134,7 +136,7 @@ function CreateRelease() {
 
       {/* Step 2 */}
       <div className="section upload-section">
-        <h3>Step 2: Upload Cover Artwork</h3>
+        <h3>Upload Cover Artwork</h3>
         <div className="form-grid">
           <div className="upload-box" onClick={() => document.getElementById("fileInput").click()}>
             <input
@@ -172,7 +174,7 @@ function CreateRelease() {
 
     {/* Step 3 */}
 <div className="section">
-  <h3>Step 3: Contributors</h3>
+  <h3>Contributors</h3>
 
   
 
@@ -385,7 +387,7 @@ function CreateRelease() {
               </div>
 
             <div style={{ marginTop: "30px" }}>  {/* Add spacing before button */}
-                    <button className="btn-secondary localize-btn">Localize Your Release</button>
+                    <button className="btn-secondary ">Localize Your Release</button>
             </div>
 
             <p className="field-tip">
@@ -773,7 +775,7 @@ function CreateRelease() {
 
       {/* Step 4 */}
       <div className="section">
-        <h3>Step 4: Genres</h3>
+        <h3>Genres</h3>
 
         <div className="genres-grid">
           <div>
@@ -801,12 +803,43 @@ function CreateRelease() {
         </div>
       </div>
 
-      {/* {step 5 } */}
+
+      {/* {step :5} */}
+
+       <div className="section">
+        <h3>Duration</h3>
+        <div style={{display:"flex",gap:"30px" , marginLeft:"10%"}}>
+           <div className="date-box">
+                <label>Digital Release Date <span style={{color:"red"}}>*</span></label>
+                <input
+                  type="text"
+                  placeholder="DD/MM/YYYY"
+                  value={digitalDate}
+                  style={{width:"300px"}}
+                  onChange={(e) => setDigitalDate(e.target.value)}
+                />
+              </div>
+
+              <div className="date-box">
+                <label>Original Release Date <span style={{color:"red"}}>*</span></label>
+                <input
+                  type="text"
+                  placeholder="DD/MM/YYYY"
+                  value={originalDate}
+                  style={{width:"300px"}}
+                  onChange={(e) => setOriginalDate(e.target.value)}
+                />
+              </div>
+            </div>
+
+        </div>
+             
+      {/* {step:6} */}
       <div className="section">
-        <h3>Step 4: Genres</h3>
+        <h3>UPC</h3>
          <div className="input-group">
-          <label htmlFor="title" >ISRC CODE <span style={{color:"red"}}>*</span> </label>
-          <input type="text" id="title" placeholder="Enter Your Isrc Code" className="input-field" style={{width:"50%"}}  />
+          <label htmlFor="title" >UPC CODE <span style={{color:"red"}}>*</span> </label>
+          <input type="text" id="title" placeholder="Enter Your UPC Code" className="input-field" style={{width:"50%"}}  />
         </div>
 
       </div>
@@ -815,7 +848,7 @@ function CreateRelease() {
       {/* Action Buttons */}
       <div className="form-actions">
         <button className="btn-secondary" onClick={() => navigate("/")}>Cancel</button>
-        <button className="new-release-button" onClick={() => navigate("/release-metadata")}>Next</button>
+        <button className="new-release-button" onClick={() => navigate("/upload-tracks")}>Next</button>
       </div>
 
 

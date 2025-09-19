@@ -82,7 +82,7 @@ function Home() {
           </button>
       </div>
 
-      <div className="releases-container">
+      <div className="releases-container" onClick={()=>navigate("/preview-distribute")}>
         {releases.map((release, i) => (
           <div key={i} className="release-card">
             <div className="album-art">

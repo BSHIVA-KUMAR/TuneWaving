@@ -16,6 +16,7 @@ import UploadTracks from "./pages/UploadTracks.jsx";
 import ReleaseForm from "./pages/ReleaseForm.jsx";
 import PreviewDistributePage from "./pages/PreviewDistributePage.jsx";
 import TrackDetails from "./pages/TrackDetails.jsx";
+import TicketRaisePage from "./pages/TicketRaisePage";
 // import YTServicesPage from "./pages/YTServicesPage";
 
 import "./App.css";
@@ -41,6 +42,7 @@ function App() {
         <Route path="/four-page" element={<ReleaseForm />} />
         <Route path="/preview-distribute" element={<PreviewDistributePage />} />
         <Route path="/track-details" element={<TrackDetails />} />
+        <Route path="/ticket-raise" element={<TicketRaisePage />} />
 
         {/* ✅ Correct path for YT Services */}
         <Route path="/yt-services" element={<YTServicesPage />} />

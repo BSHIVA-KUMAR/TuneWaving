@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import DataTable from "./DataTable";
 import CopyButton from "./CopyButton";
@@ -40,6 +39,14 @@ function TracksTab({searchTerm, showMode, setTableData, onSelectionChange}) {
       )
     }
   ];
+
+  useEffect(() => {
+    const filtered = tracksData.filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase()) 
+    );
+    setTableData(filtered);
+  }, [searchTerm, setTableData]);
 
   const filteredData = tracksData.filter(
     (item) =>

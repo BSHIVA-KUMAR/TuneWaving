@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import DataTable from "./DataTable";
 import GridView from "./GridView";
@@ -103,33 +102,22 @@ function ArtistsTab({searchTerm, showMode, setTableData, onSelectionChange}) {
     }
   ];
 
-  // const filteredData = artistsData.filter(item =>
-  //   item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //   item.legalName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //   item.artistId.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
+  useEffect(() => {
+  const filtered = artistsData.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+      item.legalName.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+      item.artistId.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+  );
+  setTableData(filtered);
+}, [searchTerm, setTableData]);
 
-  // return (
-  //   <div className="artists-tab">
-  //     <DataTable 
-  //       data={filteredData}
-  //       columns={columns}
-  //       // itemsPerPage={12}
-  //     />
-  //   </div>
-  // );
- const filteredData = artistsData.filter(
+const filteredData = artistsData.filter(
   (item) =>
     item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
     item.legalName.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
     item.artistId.toLowerCase().includes(searchTerm?.toLowerCase() || "")
 );
-
-
-  useEffect(() => {
-  setTableData(filteredData);
-}, [filteredData, setTableData]);
-
 
 
   return (

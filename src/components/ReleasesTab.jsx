@@ -1,4 +1,3 @@
-
 import {React, useEffect} from "react";
 import DataTable from "./DataTable";
 import "../styles/ReleasesTab.css";
@@ -699,17 +698,19 @@ function ReleasesTab({ searchTerm, showMode, setTableData, onSelectionChange }) 
     { key: "duration", label: "DURATION", sortable: true }
   ];
 
+  useEffect(() => {
+  const filtered = releasesData.filter(
+    (item) =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  setTableData(filtered);
+}, [searchTerm, setTableData]);
+
   const filteredData = releasesData.filter(
     (item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) 
+      item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  console.log("Filtered Data:", filteredData);
-
-
-
-  useEffect(() => {
-  setTableData(filteredData);
-}, [filteredData, setTableData]);
+ 
 
 
 

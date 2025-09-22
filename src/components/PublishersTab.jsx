@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import DataTable from "./DataTable";
 import GridView from "./GridView";
 import CopyButton from "./CopyButton";
@@ -118,23 +117,26 @@ function PublishersTab({searchTerm, showMode, setTableData, onSelectionChange}) 
     }
   ];
 
+  useEffect(() => {
+    const filtered = publishersData.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+      item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+    );
+    setTableData(filtered);
+  }, [searchTerm, setTableData]);
 
   const filteredData = publishersData.filter((item) =>
-        item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
-        item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
-      );
-
-      // console.log("Search Term:", searchTerm);
-      // console.log("Filtered Data:", filteredData);
-        useEffect(() => {
-        setTableData(filteredData);
-      } , [filteredData, setTableData]);  
+    item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+    item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+  );
 
   return (
     <div className="publishers-tab">
-      {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
-      } 
+      {showMode === "grid" ? (
+        <GridView data={filteredData} />
+      ) : (
+        <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
+      )}
     </div>
   );
 }

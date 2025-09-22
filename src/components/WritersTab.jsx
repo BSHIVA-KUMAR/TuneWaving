@@ -1,13 +1,11 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import DataTable from "./DataTable";
 import GridView from "./GridView";
 import CopyButton from "./CopyButton";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function WritersTab({searchTerm, showMode, setTableData, onSelectionChange}) {
-
+function WritersTab({ searchTerm, showMode, setTableData, onSelectionChange }) {
   const writersData = [
     { id: 1, name: "Gulzar", writerId: "WRT001", country: "India", isni: "0000000123456000", image: "/src/assets/samplIcon.png" },
     { id: 2, name: "Ed Sheeran", writerId: "WRT002", country: "UK", isni: "0000000987654000", image: "/src/assets/samplIcon.png" }
@@ -40,24 +38,28 @@ function WritersTab({searchTerm, showMode, setTableData, onSelectionChange}) {
     }
   ];
 
-const filteredData = writersData.filter((item) =>
-        item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
-        item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
-      );
+  useEffect(() => {
+    const filteredData = writersData.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+      item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
+    );
+    setTableData(filteredData);
+  }, [searchTerm, setTableData]);
 
-      // console.log("Search Term:", searchTerm);
-      // console.log("Filtered Data:", filteredData);
-        useEffect(() => {
-        setTableData(filteredData);
-      } , [filteredData, setTableData]);  
-  return (
-    <div className="writers-tab">
-      {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
-      } 
-    </div>
+  const filteredData = writersData.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm?.toLowerCase() || "") ||
+    item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
   );
 
+  return (
+    <div className="writers-tab">
+      {showMode === "grid" ? (
+        <GridView data={filteredData} />
+      ) : (
+        <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
+      )}
+    </div>
+  );
 }
 
 export default WritersTab;

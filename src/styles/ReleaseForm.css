@@ -80,3 +80,29 @@
 .btn:hover {
   opacity: 0.9;
 }
+
+.radio-label{
+  margin-left: 10px;
+  text-align: left;
+  font-size: 20px;
+  padding-top: 5px;
+}
+
+.i{
+  display: flex;
+  justify-content: left;
+}
+.label-p{
+  text-align: right;
+}
+.btn-container{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.custom-radio{
+  padding-left: 10px;
+}
+.popup-content input{
+  width: 20px;
+}

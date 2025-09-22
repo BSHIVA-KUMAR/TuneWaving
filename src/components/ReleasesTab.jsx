@@ -1,12 +1,13 @@
 
-import React from "react";
+import {React, useEffect} from "react";
 import DataTable from "./DataTable";
 import "../styles/ReleasesTab.css";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 import GridView from "./GridView";
 
-function ReleasesTab({searchTerm,showMode}) {
+
+function ReleasesTab({ searchTerm, showMode, setTableData, onSelectionChange }) {
 
   // Sample data for releases
   const releasesData = [
@@ -706,10 +707,17 @@ function ReleasesTab({searchTerm,showMode}) {
 
 
 
+  useEffect(() => {
+  setTableData(filteredData);
+}, [filteredData, setTableData]);
+
+
+
+  
   return (
     <div className="releases-tab">
       {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
       } 
     </div>
   );

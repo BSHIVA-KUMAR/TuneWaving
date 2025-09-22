@@ -42,7 +42,7 @@
   align-items: center;
   background: #ffffff;
   padding: 0 15px;
-  border-radius: 27px;
+  /* border-radius: 27px; */
   border: 1px solid #bfbfbf;
   width: 400px;
   height: 40px;
@@ -54,8 +54,9 @@
   margin-right: 8px;
 }
 
-.search-box input {
+.search-box .input-box {
   border: none;
+  
   outline: none;
   background: transparent;
   font-size: 14px;
@@ -327,3 +328,20 @@
 
 
 
+/* Add spacing between each nav item */
+.menu .nav-item {
+  margin-right: 20px; /* adjust as per your design */
+  display: inline-block;
+}
+
+/* Optional: Remove margin on last item */
+.menu .nav-item:last-child {
+  margin-right: 0;
+}
+
+/* Ensure dropdowns align properly */
+.dropdown-parent .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

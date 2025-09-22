@@ -1,135 +1,151 @@
 
-// import React, { useState, useEffect } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import CatalogSidebar from "../components/CatalogSidebar";
-// import ReleasesTab from "../components/ReleasesTab";
-// import TracksTab from "../components/TracksTab";
-// import ArtistsTab from "../components/ArtistsTab";
-// import PerformersTab from "../components/PerformersTab";
-// import ProducersTab from "../components/ProducersTab";
-// import WritersTab from "../components/WritersTab";
-// import PublishersTab from "../components/PublishersTab";
-// import LabelsTab from "../components/LabelsTab";
-// import menu from "../assets/menu.png";
-// import box from "../assets/box.png";
-// import filter from '../assets/filter.png';
-// import dot from '../assets/dot.png'
-// import GridView from "../assets/GridView.svg";
-// import "../styles/CatalogPage.css";
-// import SearchIcon from "../assets/Vector.png";
-// import { FaSearch, FaBell, FaCog, FaUser, FaPlus } from "react-icons/fa"; // icons
-// // import { SearchIcon } from "lucide-react";
+// // import React, { useState, useEffect } from "react";
+// // import { useLocation, useNavigate } from "react-router-dom";
+// // import CatalogSidebar from "../components/CatalogSidebar";
+// // import ReleasesTab from "../components/ReleasesTab";
+// // import TracksTab from "../components/TracksTab";
+// // import ArtistsTab from "../components/ArtistsTab";
+// // import PerformersTab from "../components/PerformersTab";
+// // import ProducersTab from "../components/ProducersTab";
+// // import WritersTab from "../components/WritersTab";
+// // import PublishersTab from "../components/PublishersTab";
+// // import LabelsTab from "../components/LabelsTab";
 
+// // import SearchIcon from "../assets/Vector.png";
+// // import Download from "../assets/Download.svg";
+// // import DownloadFull from "../assets/DownloadFill.svg";
+// // // ✅ Proper icons
+// // import List from "../assets/List.svg";
+// // import ListFill from "../assets/ListFill.svg";
+// // import Grid from "../assets/GridView.svg";
 
-// import FilterSidebar from "../components/FilterSidebar"; // import new component
-  
+// // // import Filter from "../assets/Filter.svg";
+// // // import FilterFill from "../assets/FilterFill.svg";
 
-// function CatalogPage() {
-//   const [activeTab, setActiveTab] = useState("releases");
-//   const [searchTerm,setSearchTerm] = useState("")
-//   const [showMode,setShowMode] = useState("list") // list or grid
-//   const location = useLocation();
-//   const [filterOpen, setFilterOpen] = useState(false);
+// // import Dot from "../assets/dot.png";
+// // import DotFill from "../assets/dot.png"; // create this if missing
+// // import GridFill from "../assets/GridFill.svg";
+// // import "../styles/CatalogPage.css";
 
-//   const navigate = useNavigate()
+// // function CatalogPage() {
+// //   const [activeTab, setActiveTab] = useState("releases");
+// //   const [searchTerm, setSearchTerm] = useState("");
+// //   const [showMode, setShowMode] = useState("list");
+// //   const [filterOpen, setFilterOpen] = useState(false);
+// //   const [dotOpen, setDotOpen] = useState(false);
 
-//   useEffect(() => {
-//     const urlParams = new URLSearchParams(location.search);
-//     const tab = urlParams.get("tab");
-//     const validTabs = [
-//       "releases",
-//       "tracks",
-//       "artists",
-//       "performers",
-//       "producers",
-//       "writers",
-//       "publishers",
-//       "labels",
-//     ];
-//     if (tab && validTabs.includes(tab)) {
-//       setActiveTab(tab);
-//     }
-//   }, [location]);
+// //   const location = useLocation();
+// //   const navigate = useNavigate();
 
-//   const renderContent = () => {
-//     switch (activeTab) {
-//       case "releases":
-//         return <ReleasesTab searchTerm={searchTerm} showMode={showMode} />;
-//       case "tracks":
-//         return <TracksTab searchTerm={searchTerm} showMode={showMode}/>;
-//       case "artists":
-//         return <ArtistsTab serachTerm={searchTerm} showMode={showMode}/>;
-//       case "performers":
-//         return <PerformersTab searchTerm={searchTerm} showMode={showMode}/>;
-//       case "producers":
-//         return <ProducersTab searchTerm={searchTerm} showMode={showMode}/>;
-//       case "writers":
-//         return <WritersTab searchTerm={searchTerm} showMode={showMode}/>;
-//       case "publishers":
-//         return <PublishersTab  searchTerm={searchTerm} showMode={showMode}/>;
-//       case "labels":
-//         return <LabelsTab serachTerm={searchTerm} showMode={showMode}/>;
-//       default:
-//         return <h1>Page not found / No data found</h1>
-//     }
-//   };
+// //   // keep your detectCategory if needed
 
-//   return (
-//     <div className="catalog-page">
+// //   useEffect(() => {
+// //     const urlParams = new URLSearchParams(location.search);
+// //     const tab = urlParams.get("tab");
+// //     const validTabs = [
+// //       "releases",
+// //       "tracks",
+// //       "artists",
+// //       "performers",
+// //       "producers",
+// //       "writers",
+// //       "publishers",
+// //       "labels",
+// //     ];
+// //     if (tab && validTabs.includes(tab)) {
+// //       setActiveTab(tab);
+// //     }
+// //   }, [location]);
 
-//       <div className="catalog-header">    
-//             <h2 className="catalog-title">
-//               {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-//             </h2>
+// //   const renderContent = () => {
+// //     switch (activeTab) {
+// //       case "releases":
+// //         return <ReleasesTab searchTerm={searchTerm} showMode={showMode} />;
+// //       case "tracks":
+// //         return <TracksTab searchTerm={searchTerm} showMode={showMode} />;
+// //       case "artists":
+// //         return <ArtistsTab searchTerm={searchTerm} showMode={showMode} />;
+// //       case "performers":
+// //         return <PerformersTab searchTerm={searchTerm} showMode={showMode} />;
+// //       case "producers":
+// //         return <ProducersTab searchTerm={searchTerm} showMode={showMode} />;
+// //       case "writers":
+// //         return <WritersTab searchTerm={searchTerm} showMode={showMode} />;
+// //       case "publishers":
+// //         return <PublishersTab searchTerm={searchTerm} showMode={showMode} />;
+// //       case "labels":
+// //         return <LabelsTab searchTerm={searchTerm} showMode={showMode} />;
+// //       default:
+// //         return <h1>Page not found / No data found</h1>;
+// //     }
+// //   };
 
-//           {/* Search Bar */}
-//             {/* <div className="catalog-search">
-//               <img src={SearchIcon} className="search-icon" />
-//               <input type="text" placeholder="Search..." value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} />
-//             </div> */}
+// //   return (
+// //     <div className="catalog-page">
+// //       <div className="catalog-header">
+// //         <h2 className="catalog-title">
+// //           {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+// //         </h2>
 
-//             <div className="search-box">
-//               <img src={SearchIcon} alt="search" className="search-icon" />
-//               <input type="text" placeholder="Search..." value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} />
-//             </div>
-                  
+// //         {/* ✅ Search Bar */}
+// //         <div className="search-box">
+// //           <img src={SearchIcon} alt="search" className="search-icon" />
+// //           <input
+// //             type="text"
+// //             placeholder="Search..."
+// //             value={searchTerm}
+// //             onChange={(e) => setSearchTerm(e.target.value)}
+// //           />
+// //         </div>
 
-//           {/* Icons Row */}
-//             <div className="catalog-icons">
-//               {/* <FaBell />
-//               <FaCog />
-//               <FaUser />
-//               <FaPlus className="create-release" title="Create Release" /> */}
-              
-//               <button className="btn-img" onClick={()=>setShowMode("list")}><img  src={menu}/></button>
-//               <button className="btn-img" onClick={()=>setShowMode("grid")}><img  src={GridView} /></button>
-//               <button className="btn-img round"  onClick={() => setFilterOpen(true)}><img src={filter} /></button>
-//               <button className="btn-img round"><img  src={dot} /></button>
-//               <button
-//         className="new-release-button"
-//         onClick={() => navigate("/create-release")}
-//         >
-//           Create Release
-//         </button>
-//             </div>
-//       </div>
-      
-//       <CatalogSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+// //         {/* ✅ Icons Row */}
+// //         <div className="catalog-icons" style={{ position: "relative" }}>
+// //           {/* List Toggle */}
+// //           <button className="btn-img" onClick={() => setShowMode("list")}>
+// //             <img src={showMode === "list" ? List : ListFill} alt="list" />
+// //           </button>
 
-//       <div className="catalog-content">
-//         {/* 🔹 Top Header Bar */}
-        
-//         {renderContent()}
-//       </div>
+// //           {/* Grid Toggle */}
+// //           <button className="btn-img" onClick={() => setShowMode("grid")}>
+// //             <img src={showMode === "grid" ? GridFill : Grid} alt="grid" />
+// //           </button>
 
-      
-//       {/* Filter Sidebar */}
-//     </div>
+// //           {/* Filter Toggle */}
+// //           <button
+// //             className="btn-img round"
+// //             onClick={() => setFilterOpen((prev) => !prev)}
+// //           >
+// //             <img src={filterOpen ? DownloadFull : Download} alt="filter" />
+// //             {/*<img src={filterOpen ? FilterFill : Filter} alt="filter" />  */}
+// //           </button>
 
-//   );
-// }
+// //           {/* Dots Toggle */}
+// //           <button
+// //             className="btn-img round"
+// //             onClick={() => setDotOpen((prev) => !prev)}
+// //           >
+// //             <img src={dotOpen ? DotFill : Dot} alt="options" />
+// //           </button>
+
+// //           {/* Create Release */}
+// //           <button
+// //             className="new-release-button"
+// //             onClick={() => navigate("/create-release")}
+// //           >
+// //             Create Release
+// //           </button>
+// //         </div>
+// //       </div>
+
+// //       <CatalogSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+
+// //       <div className="catalog-content">{renderContent()}</div>
+// //     </div>
+// //   );
+// // }
 
 // // export default CatalogPage;
+
 // import React, { useState, useEffect } from "react";
 // import { useLocation, useNavigate } from "react-router-dom";
 // import CatalogSidebar from "../components/CatalogSidebar";
@@ -141,25 +157,46 @@
 // import WritersTab from "../components/WritersTab";
 // import PublishersTab from "../components/PublishersTab";
 // import LabelsTab from "../components/LabelsTab";
-// import menu from "../assets/menu.png";
-// import box from "../assets/box.png";
-// import filter from "../assets/filter.png";
-// import dot from "../assets/dot.png";
-// import GridView from "../assets/GridView.svg";
-// import "../styles/CatalogPage.css";
+
 // import SearchIcon from "../assets/Vector.png";
-// import FilterSidebar from "../components/FilterSidebar"; // ✅ import
+// import Download from "../assets/Download.svg";
+// import DownloadFull from "../assets/DownloadFill.svg";
+
+// import List from "../assets/List.svg";
+// import ListFill from "../assets/ListFill.svg";
+// import Grid from "../assets/GridView.svg";
+// import GridFill from "../assets/GridFill.svg";
+
+// import Dot from "../assets/dot.png";
+// import DotFill from "../assets/dot.png";
+
+// import "../styles/CatalogPage.css";
+
+// import * as XLSX from "xlsx";
+// import { saveAs } from "file-saver";
 
 // function CatalogPage() {
 //   const [activeTab, setActiveTab] = useState("releases");
 //   const [searchTerm, setSearchTerm] = useState("");
 //   const [showMode, setShowMode] = useState("list");
-//   const [filterOpen, setFilterOpen] = useState(false); // ✅ state for filter sidebar
+//   const [downloadOpen, setDownloadOpen] = useState(false);
+//   const [dotOpen, setDotOpen] = useState(false);
+//   const [selectedRows, setSelectedRows] = useState([]);
 
-
-  
 //   const location = useLocation();
 //   const navigate = useNavigate();
+
+//   // Placeholder state for table data (replace with real data from each tab)
+//   const [releasesData, setReleasesData] = useState([]);
+//   const [tracksData, setTracksData] = useState([]);
+//   const [artistsData, setArtistsData] = useState([]);
+//   const [publishersData, setPublishersData] = useState([]);
+//   const [labelsData, setLabelsData] = useState([]);
+//   const [writersData, setWritersData] = useState([]);
+//   const [producersData, setProducersData] = useState([]);
+//   const [performersData, setPerfomersData] = useState([]);
+
+//   // ... similarly for other tabs
 
 //   useEffect(() => {
 //     const urlParams = new URLSearchParams(location.search);
@@ -179,24 +216,77 @@
 //     }
 //   }, [location]);
 
+//   // --- Download function ---
+//   const getCurrentTableData = () => {
+//     switch (activeTab) {
+//       case "releases":
+//         return releasesData;
+//       case "tracks":
+//         return tracksData;
+//       case "artists":
+//         return artistsData;
+//       case "labels":
+//         return labelsData;
+//       case "performers":
+//         return performersData;
+//       case "writers":
+//         return writersData;
+//       case "publishers":
+//         return publishersData;
+//       case "producers":
+//         return producersData;
+//       // ... other tabs
+//       default:
+//         return [ "No Data TO Download"];
+//     }
+//   };
+
+//   const handleDownload = (type) => {
+//     const tableData = getCurrentTableData();
+//     if (!tableData || tableData.length === 0) return;
+
+//     if (type === "csv") {
+//       const header = Object.keys(tableData[0]).join(",");
+//       const rows = tableData
+//         .map((row) => Object.values(row).join(","))
+//         .join("\n");
+//       const csvContent = header + "\n" + rows;
+//       const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+//       saveAs(blob, `${activeTab}.csv`);
+//     } else if (type === "xls") {
+//       const ws = XLSX.utils.json_to_sheet(tableData);
+//       const wb = XLSX.utils.book_new();
+//       XLSX.utils.book_append_sheet(wb, ws, activeTab);
+//       const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+//       saveAs(
+//         new Blob([wbout], { type: "application/octet-stream" }),
+//         `${activeTab}.xlsx`
+//       );
+//     }
+
+//     setDownloadOpen(false); // close dropdown after download
+//   };
+
+  
+
 //   const renderContent = () => {
 //     switch (activeTab) {
 //       case "releases":
-//         return <ReleasesTab searchTerm={searchTerm} showMode={showMode} />;
+//         return <ReleasesTab searchTerm={searchTerm} showMode={showMode} setTableData={setReleasesData}  onSelectionChange={setSelectedRows} />;
 //       case "tracks":
-//         return <TracksTab searchTerm={searchTerm} showMode={showMode} />;
+//         return <TracksTab searchTerm={searchTerm} showMode={showMode} setTableData={setTracksData} onSelectionChange={setSelectedRows} />;
 //       case "artists":
-//         return <ArtistsTab searchTerm={searchTerm} showMode={showMode} />;
+//         return <ArtistsTab searchTerm={searchTerm} showMode={showMode} setTableData={setArtistsData} onSelectionChange={setSelectedRows} />;
 //       case "performers":
-//         return <PerformersTab searchTerm={searchTerm} showMode={showMode} />;
+//         return <PerformersTab searchTerm={searchTerm} showMode={showMode} setTableData={setPerfomersData} onSelectionChange={setSelectedRows} />;
 //       case "producers":
-//         return <ProducersTab searchTerm={searchTerm} showMode={showMode} />;
+//         return <ProducersTab searchTerm={searchTerm} showMode={showMode} setTableData={setProducersData} onSelectionChange={setSelectedRows} />;
 //       case "writers":
-//         return <WritersTab searchTerm={searchTerm} showMode={showMode} />;
+//         return <WritersTab searchTerm={searchTerm} showMode={showMode} setTableData={setWritersData} onSelectionChange={setSelectedRows} />;
 //       case "publishers":
-//         return <PublishersTab searchTerm={searchTerm} showMode={showMode} />;
+//         return <PublishersTab searchTerm={searchTerm} showMode={showMode} setTableData={setPublishersData} onSelectionChange={setSelectedRows} />;
 //       case "labels":
-//         return <LabelsTab searchTerm={searchTerm} showMode={showMode} />;
+//         return <LabelsTab searchTerm={searchTerm} showMode={showMode} setTableData={setLabelsData} onSelectionChange={setSelectedRows}/>;
 //       default:
 //         return <h1>Page not found / No data found</h1>;
 //     }
@@ -222,43 +312,61 @@
 
 //         {/* Icons Row */}
 //         <div className="catalog-icons" style={{ position: "relative" }}>
-//   <button className="btn-img" onClick={() => setShowMode("list")}>
-//     <img src={menu} />
-//   </button>
-//   <button className="btn-img" onClick={() => setShowMode("grid")}>
-//     <img src={GridView} />
-//   </button>
-//   {/* Filter button */}
-//   <button
-//     className="btn-img round"
-//     onClick={() => setFilterOpen((prev) => !prev)}
-//   >
-//     <img src={filter} />
-//   </button>
-//   <button className="btn-img round">
-//     <img src={dot} />
-//   </button>
-//   <button
-//     className="new-release-button"
-//     onClick={() => navigate("/create-release")}
-//   >
-//     Create Release
-//   </button>
-// </div>
+//           <button className="btn-img round" onClick={() => setShowMode("list")}>
+//             <img src={showMode === "list" ? List : ListFill} alt="list" />
+//           </button>
+//           <button className="btn-img round" onClick={() => setShowMode("grid")}>
+//             <img src={showMode === "grid" ? GridFill : Grid} alt="grid" />
+//           </button>
 
+//           {/* Download Dropdown */}
+//           <div className="download-wrapper">
+//             <button
+//               className="btn-img round"
+//               onClick={() => setDownloadOpen((prev) => !prev)}
+//             >
+//               <img src={downloadOpen ? DownloadFull : Download} alt="download" />
+//             </button>
+//             {downloadOpen && (
+//               <div className="download-menu">
+//                 <button onClick={() => handleDownload("csv")}>CSV</button>
+//                 <button onClick={() => handleDownload("xls")}>XLS</button>
+//               </div>
+//             )}
+//           </div>
+
+//           {/* Dots Toggle */}
+//           {/* <button
+//             className="btn-img round"
+//             onClick={() => setDotOpen((prev) => !prev)}
+//           >
+//             <img src={dotOpen ? DotFill : Dot} alt="options" />
+//           </button> */}
+
+//           {/* Create Release */}
+//           <button
+//             className="new-release-button"
+//             onClick={() => navigate("/create-release")}
+//           >
+//             Create Release
+//           </button>
+//         </div>
 //       </div>
 
 //       <CatalogSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
 //       <div className="catalog-content">{renderContent()}</div>
-
-//       {/* ✅ Filter Sidebar */}
-//       <FilterSidebar isOpen={filterOpen} onClose={() => setFilterOpen(false)} />
 //     </div>
 //   );
 // }
 
 // export default CatalogPage;
+
+
+
+
+
+
 
 
 import React, { useState, useEffect } from "react";
@@ -272,50 +380,40 @@ import ProducersTab from "../components/ProducersTab";
 import WritersTab from "../components/WritersTab";
 import PublishersTab from "../components/PublishersTab";
 import LabelsTab from "../components/LabelsTab";
-import menu from "../assets/menu.png";
-import filter from "../assets/filter.png";
-import dot from "../assets/dot.png";
-import GridView from "../assets/GridView.svg";
-import "../styles/CatalogPage.css";
+
 import SearchIcon from "../assets/Vector.png";
-//import FilterSidebar from "../components/FilterSidebar";
+import Download from "../assets/Download.svg";
+import DownloadFull from "../assets/DownloadFill.svg";
+
+import List from "../assets/List.svg";
+import ListFill from "../assets/ListFill.svg";
+import Grid from "../assets/GridView.svg";
+import GridFill from "../assets/GridFill.svg";
+
+import "../styles/CatalogPage.css";
+
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 function CatalogPage() {
   const [activeTab, setActiveTab] = useState("releases");
   const [searchTerm, setSearchTerm] = useState("");
   const [showMode, setShowMode] = useState("list");
-  //const [filterOpen, setFilterOpen] = useState(false);
+  const [downloadOpen, setDownloadOpen] = useState(false);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  // ✅ detect category from search input
-  // const detectCategory = (term) => {
-  //   if (!term) return null;
-
-  //   // UPC → only numbers 12 or 13 digits
-  //   if (/^\d{12,13}$/.test(term)) {
-  //     return "releases";
-  //   }
-
-  //   // Release ID → e.g. REL123
-  //   if (/^REL\d+$/i.test(term)) {
-  //     return "releases";
-  //   }
-
-  //   // Label ID → e.g. LAB001
-  //   if (/^LAB\d+$/i.test(term)) {
-  //     return "labels";
-  //   }
-
-  //   // Artist ID → e.g. A001
-  //   if (/^A\d+$/i.test(term)) {
-  //     return "artists";
-  //   }
-
-  //   // Otherwise → treat as name (artist by default)
-  //   return "artists";
-  // };
+  // Placeholder state for table data (replace with real data from each tab)
+  const [releasesData, setReleasesData] = useState([]);
+  const [tracksData, setTracksData] = useState([]);
+  const [artistsData, setArtistsData] = useState([]);
+  const [publishersData, setPublishersData] = useState([]);
+  const [labelsData, setLabelsData] = useState([]);
+  const [writersData, setWritersData] = useState([]);
+  const [producersData, setProducersData] = useState([]);
+  const [performersData, setPerfomersData] = useState([]);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -330,29 +428,71 @@ function CatalogPage() {
       "publishers",
       "labels",
     ];
-    if (tab && validTabs.includes(tab)) {
-      setActiveTab(tab);
-    }
+    if (tab && validTabs.includes(tab)) setActiveTab(tab);
   }, [location]);
+
+  // --- Get current tab table data ---
+  const getCurrentTableData = () => {
+    switch (activeTab) {
+      case "releases": return releasesData;
+      case "tracks": return tracksData;
+      case "artists": return artistsData;
+      case "labels": return labelsData;
+      case "performers": return performersData;
+      case "writers": return writersData;
+      case "publishers": return publishersData;
+      case "producers": return producersData;
+      default: return [];
+    }
+  };
+
+  // --- Download function ---
+  const handleDownload = (type, scope = "all") => {
+    const tableData = getCurrentTableData();
+    if (!tableData || tableData.length === 0) return;
+
+    let dataToExport = tableData;
+
+    if (scope === "selected" && selectedRows.length > 0) {
+      dataToExport = selectedRows;
+    }
+
+    if (!dataToExport || dataToExport.length === 0) return;
+
+    if (type === "csv") {
+      const header = Object.keys(dataToExport[0]).join(",");
+      const rows = dataToExport.map((row) => Object.values(row).join(",")).join("\n");
+      const csvContent = header + "\n" + rows;
+      saveAs(new Blob([csvContent], { type: "text/csv;charset=utf-8;" }), `${activeTab}.csv`);
+    } else if (type === "xls") {
+      const ws = XLSX.utils.json_to_sheet(dataToExport);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, activeTab);
+      const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+      saveAs(new Blob([wbout], { type: "application/octet-stream" }), `${activeTab}.xlsx`);
+    }
+
+    setDownloadOpen(false);
+  };
 
   const renderContent = () => {
     switch (activeTab) {
       case "releases":
-        return <ReleasesTab searchTerm={searchTerm} showMode={showMode} />;
+        return <ReleasesTab searchTerm={searchTerm} showMode={showMode} setTableData={setReleasesData} onSelectionChange={setSelectedRows} />;
       case "tracks":
-        return <TracksTab searchTerm={searchTerm} showMode={showMode} />;
+        return <TracksTab searchTerm={searchTerm} showMode={showMode} setTableData={setTracksData} onSelectionChange={setSelectedRows} />;
       case "artists":
-        return <ArtistsTab searchTerm={searchTerm} showMode={showMode} />;
+        return <ArtistsTab searchTerm={searchTerm} showMode={showMode} setTableData={setArtistsData} onSelectionChange={setSelectedRows} />;
       case "performers":
-        return <PerformersTab searchTerm={searchTerm} showMode={showMode} />;
+        return <PerformersTab searchTerm={searchTerm} showMode={showMode} setTableData={setPerfomersData} onSelectionChange={setSelectedRows} />;
       case "producers":
-        return <ProducersTab searchTerm={searchTerm} showMode={showMode} />;
+        return <ProducersTab searchTerm={searchTerm} showMode={showMode} setTableData={setProducersData} onSelectionChange={setSelectedRows} />;
       case "writers":
-        return <WritersTab searchTerm={searchTerm} showMode={showMode} />;
+        return <WritersTab searchTerm={searchTerm} showMode={showMode} setTableData={setWritersData} onSelectionChange={setSelectedRows} />;
       case "publishers":
-        return <PublishersTab searchTerm={searchTerm} showMode={showMode} />;
+        return <PublishersTab searchTerm={searchTerm} showMode={showMode} setTableData={setPublishersData} onSelectionChange={setSelectedRows} />;
       case "labels":
-        return <LabelsTab searchTerm={searchTerm} showMode={showMode} />;
+        return <LabelsTab searchTerm={searchTerm} showMode={showMode} setTableData={setLabelsData} onSelectionChange={setSelectedRows} />;
       default:
         return <h1>Page not found / No data found</h1>;
     }
@@ -361,51 +501,74 @@ function CatalogPage() {
   return (
     <div className="catalog-page">
       <div className="catalog-header">
-        <h2 className="catalog-title">
-          {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-        </h2>
+        <h2 className="catalog-title">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</h2>
 
-        {/* ✅ Search Bar with detection */}
+        {/* Search Bar */}
         <div className="search-box">
           <img src={SearchIcon} alt="search" className="search-icon" />
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                const detectedTab = detectCategory(searchTerm);
-                if (detectedTab) {
-                  setActiveTab(detectedTab);
-                  navigate(`?tab=${detectedTab}`);
-                }
-              }
-            }}
-          />
+          <input type="text" className="input-box" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
         </div>
 
         {/* Icons Row */}
         <div className="catalog-icons" style={{ position: "relative" }}>
-          <button className="btn-img" onClick={() => setShowMode("list")}>
-            <img src={menu} />
+          <button className="btn-img round" onClick={() => setShowMode("list")}>
+            <img src={showMode === "list" ? List : ListFill} alt="list" />
           </button>
-          <button className="btn-img" onClick={() => setShowMode("grid")}>
-            <img src={GridView} />
+          <button className="btn-img round" onClick={() => setShowMode("grid")}>
+            <img src={showMode === "grid" ? GridFill : Grid} alt="grid" />
           </button>
-          <button
-            className="btn-img round"
-            onClick={() => setFilterOpen((prev) => !prev)}
-          >
-            <img src={filter} />
+
+          {/* Download Dropdown */}
+          {/* <div className="download-wrapper">
+            <button className="btn-img round" onClick={() => setDownloadOpen((prev) => !prev)}>
+              <img src={downloadOpen ? DownloadFull : Download} alt="download" />
+            </button>
+            {downloadOpen && (
+              <div className="download-menu">
+                <button onClick={() => handleDownload("csv", "selected")}>Download Selected CSV</button>
+                <button onClick={() => handleDownload("xls", "selected")}>Download Selected XLS</button>
+                <hr />
+                <button onClick={() => handleDownload("csv", "all")}>Download Full CSV</button>
+                <button onClick={() => handleDownload("xls", "all")}>Download Full XLS</button>
+              </div>
+            )}
+          </div> */}
+
+          {/* Download Dropdown */}
+<div className="download-wrapper">
+  <button
+    className="btn-img round"
+    onClick={() => setDownloadOpen((prev) => !prev)}
+  >
+    <img src={downloadOpen ? DownloadFull : Download} alt="download" />
+  </button>
+
+  {downloadOpen && (
+    <div className="download-menu">
+      {selectedRows.length > 0 && (
+        <>
+          <button onClick={() => handleDownload("csv", "selected")}>
+            Download Selected CSV
           </button>
-          <button className="btn-img round">
-            <img src={dot} />
+          <button onClick={() => handleDownload("xls", "selected")}>
+            Download Selected XLS
           </button>
-          <button
-            className="new-release-button"
-            onClick={() => navigate("/create-release")}
-          >
+          <hr />
+        </>
+      )}
+      <button onClick={() => handleDownload("csv", "all")}>
+        Download Full CSV
+      </button>
+      <button onClick={() => handleDownload("xls", "all")}>
+        Download Full XLS
+      </button>
+    </div>
+  )}
+</div>
+
+
+          {/* Create Release */}
+          <button className="new-release-button" onClick={() => navigate("/create-release")}>
             Create Release
           </button>
         </div>
@@ -414,9 +577,6 @@ function CatalogPage() {
       <CatalogSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <div className="catalog-content">{renderContent()}</div>
-
-      {/* Filter Sidebar */}
-      {/* <FilterSidebar isOpen={filterOpen} onClose={() => setFilterOpen(false)} /> */}
     </div>
   );
 }

@@ -1,12 +1,12 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DataTable from "./DataTable";
 import GridView from "./GridView";
 import CopyButton from "./CopyButton";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function PerformersTab({searchTerm,showMode}) {
+function PerformersTab({searchTerm, showMode, setTableData, onSelectionChange}) {
 
   const performersData = [
     { id: 1, name: "Arijit Singh", performerId: "PER001", country: "India", isni: "0000000123456789", image: "/src/assets/samplIcon.png" },
@@ -60,14 +60,16 @@ function PerformersTab({searchTerm,showMode}) {
         item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
       );
 
-      console.log("Search Term:", searchTerm);
-      console.log("Filtered Data:", filteredData);
-
+      // console.log("Search Term:", searchTerm);
+      // console.log("Filtered Data:", filteredData);
+        useEffect(() => {
+        setTableData(filteredData);
+      } , [filteredData, setTableData]);      
 
   return (
     <div className="performers-tab">
       {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
       } 
     </div>
   );

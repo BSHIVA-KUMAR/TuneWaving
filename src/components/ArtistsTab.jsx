@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DataTable from "./DataTable";
 import GridView from "./GridView";
 import CopyButton from "./CopyButton";
@@ -8,7 +8,7 @@ import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
 
-function ArtistsTab({searchTerm,showMode}) {
+function ArtistsTab({searchTerm, showMode, setTableData, onSelectionChange}) {
 
 
   // Sample data for artists
@@ -126,11 +126,16 @@ function ArtistsTab({searchTerm,showMode}) {
 );
 
 
+  useEffect(() => {
+  setTableData(filteredData);
+}, [filteredData, setTableData]);
+
+
 
   return (
     <div className="artists-tab">
       {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
       } 
     </div>
   );

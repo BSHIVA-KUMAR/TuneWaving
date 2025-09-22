@@ -1,11 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DataTable from "./DataTable";
 import GridView from "./GridView";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function LabelsTab({searchTerm,showMode}) {
+function LabelsTab({searchTerm, showMode, setTableData, onSelectionChange}) {
 
   const labelsData = [
     { id: 1, name: "Sony Music", labelId: "LAB001", country: "Japan", image: "/src/assets/samplIcon.png" },
@@ -33,13 +33,19 @@ function LabelsTab({searchTerm,showMode}) {
         item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
       );
 
-      console.log("Search Term:", searchTerm);
-      console.log("Filtered Data:", filteredData);
+      // console.log("Search Term:", searchTerm);
+      // console.log("Filtered Data:", filteredData);
 
+      
+        useEffect(() => {
+        setTableData(filteredData);
+      }, [filteredData, setTableData]);
+      
+      
   return (
     <div className="labels-tab">
       {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
       } 
     </div>
   );

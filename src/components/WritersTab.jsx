@@ -1,12 +1,12 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DataTable from "./DataTable";
 import GridView from "./GridView";
 import CopyButton from "./CopyButton";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function WritersTab({searchTerm,showMode}) {
+function WritersTab({searchTerm, showMode, setTableData, onSelectionChange}) {
 
   const writersData = [
     { id: 1, name: "Gulzar", writerId: "WRT001", country: "India", isni: "0000000123456000", image: "/src/assets/samplIcon.png" },
@@ -45,13 +45,15 @@ const filteredData = writersData.filter((item) =>
         item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
       );
 
-      console.log("Search Term:", searchTerm);
-      console.log("Filtered Data:", filteredData);
-
+      // console.log("Search Term:", searchTerm);
+      // console.log("Filtered Data:", filteredData);
+        useEffect(() => {
+        setTableData(filteredData);
+      } , [filteredData, setTableData]);  
   return (
     <div className="writers-tab">
       {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
       } 
     </div>
   );

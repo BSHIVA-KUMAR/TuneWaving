@@ -1,11 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "./DataTable";
 import GridView from "./GridView";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function ProducersTab({searchTerm,showMode}) {
+function ProducersTab({searchTerm, showMode, setTableData, onSelectionChange}) {
 
   const producersData = [
     { id: 1, name: "Pritam", producerId: "PROD001", country: "India", image: "/src/assets/samplIcon.png" },
@@ -34,14 +34,16 @@ function ProducersTab({searchTerm,showMode}) {
         item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
       );
 
-      console.log("Search Term:", searchTerm);
-      console.log("Filtered Data:", filteredData);
-
+      // console.log("Search Term:", searchTerm);
+      // console.log("Filtered Data:", filteredData);
+      useEffect(() => {
+        setTableData(filteredData);
+      }, [filteredData, setTableData]);   
 
   return (
     <div className="producers-tab">
       {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange}/>
       } 
     </div>
   );

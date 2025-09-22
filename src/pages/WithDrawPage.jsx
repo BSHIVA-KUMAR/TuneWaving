@@ -112,8 +112,14 @@ const WithdrawPage = () => {
             </div>
 
             <div className="button-group">
-              <button type="submit" className="submit-btn">Submit</button>
-              <button type="button" className="cancel-btn" onClick={() => navigate("/dashboard")}>Cancel</button>
+              <button 
+                    type="submit" 
+                    // className="submit-btn"
+                    className="new-release-button "
+                    >
+                      Submit
+              </button>
+              <button type="button" className="btn-secondary" onClick={() => navigate("/dashboard")}>Cancel</button>
             </div>
           </form>
         </div>

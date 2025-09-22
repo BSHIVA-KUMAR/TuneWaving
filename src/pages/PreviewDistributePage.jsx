@@ -4,7 +4,6 @@ import "../styles/PreviewDistributePage.css";
 
 const PreviewDistributePage = () => {
   const navigate = useNavigate();
-  const [showExitPopup, setShowExitPopup] = useState(false);
   const [showAddLinkPopup, setShowAddLinkPopup] = useState(false);
   const [showAttachFilePopup, setShowAttachFilePopup] = useState(false);
 
@@ -12,18 +11,6 @@ const PreviewDistributePage = () => {
   const [files, setFiles] = useState([]);
   const [currentLink, setCurrentLink] = useState("");
   const [currentFile, setCurrentFile] = useState(null);
-
-  const handleCloseClick = () => {
-    setShowExitPopup(true);
-  };
-
-  const handleConfirmLeave = () => {
-    navigate("/dashboard");
-  };
-
-  const handleCancelLeave = () => {
-    setShowExitPopup(false);
-  };
 
   const handleAddLink = () => {
     if (currentLink.trim()) {
@@ -55,15 +42,41 @@ The beat(s) are 100% self-produced & Original`;
   return (
     <div className="preview-container">
       <div className="preview-card">
-        {/* Cross symbol at top-right (container close) */}
+        {/* Left-top back symbol */}
+        <span
+          className="back-button"
+          onClick={() => navigate(-1)}
+          style={{
+            position: "absolute",
+            left: "20px",
+            top: "20px",
+            cursor: "pointer",
+            fontSize: "24px",
+            fontWeight: "bold",
+          }}
+        >
+          ⏴
+        </span>
+
+        {/* Right-top cross symbol */}
         <span
           className="close-button"
-          onClick={handleCloseClick}
+          onClick={() => alert("Close clicked!")}
+          style={{
+            position: "absolute",
+            right: "20px",
+            top: "20px",
+            cursor: "pointer",
+            fontSize: "24px",
+            fontWeight: "bold",
+          }}
         >
           ×
         </span>
 
-        <h2 className="page-title">Preview & Distribute</h2>
+        <h2 className="page-title" style={{ textAlign: "center" }}>
+          Preview & Distribute
+        </h2>
 
         <div className="preview-details">
           <div><strong>Title:</strong> Happy days</div>
@@ -86,7 +99,15 @@ The beat(s) are 100% self-produced & Original`;
           <div><strong>Publishing rights:</strong> 2025 aBABAB</div>
           <div><strong>Original Release Date:</strong> 15/02/2025</div>
           <div><strong>ISRC Code:</strong> AA18079998989</div>
-          <div><strong>Stores:</strong> <button className="new-release-button" onClick={()=>navigate("/four-page")}>View Store</button></div>
+          <div>
+            <strong>Stores:</strong>{" "}
+            <button
+              className="new-release-button"
+              onClick={() => navigate("/four-page")}
+            >
+              View Store
+            </button>
+          </div>
           <div><strong>UPC Code:</strong> AA18079998989</div>
 
           <hr />
@@ -94,24 +115,22 @@ The beat(s) are 100% self-produced & Original`;
           <div>
             <strong>Free Beat(s) / Samples:</strong>
             <p>{helpText}</p>
-      <div style={{display:"flex"}}>
-          <button
-              className="new-release-button" style={{marginRight:"5%"}}
-              onClick={() => setShowAddLinkPopup(true)}
-            >
-              + Add Link
-            </button>
-            <button
-              className="new-release-button"
-              onClick={() => setShowAttachFilePopup(true)}
-            >
-              + Attach File
-            </button>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <button
+                className="new-release-button"
+                onClick={() => setShowAddLinkPopup(true)}
+              >
+                + Add Link
+              </button>
+              <button
+                className="new-release-button"
+                onClick={() => setShowAttachFilePopup(true)}
+              >
+                + Attach File
+              </button>
+            </div>
 
-
-      </div>
-          
-            <div className="attachments-list">
+            <div className="attachments-list" style={{ marginTop: "10px" }}>
               {links.map((link, i) => (
                 <div key={i} className="attachment-item">
                   {link}
@@ -138,29 +157,23 @@ The beat(s) are 100% self-produced & Original`;
             </div>
           </div>
 
-          <button className="new-release-button" onClick={()=>navigate("/")} style={{marginLeft:"40%"}}>Submit</button>
-        </div>
-      </div>
-
-      {/* Exit Confirmation Popup */}
-      {showExitPopup && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <p>Do you want to leave this page?</p>
-            <div className="popup-buttons">
-              <button className="new-release-button" onClick={handleConfirmLeave}>
-                Yes
-              </button>
-              <button className="btn-secondary" onClick={handleCancelLeave}>
-                No
-              </button>
-              <button className="btn-secondary" onClick={handleCancelLeave}>
-                Cancel
-              </button>
-            </div>
+          {/* Submit & Cancel Buttons */}
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: "30px" }}>
+            <button
+              className="btn-secondary"
+              onClick={() => navigate("/dashboard")} // ✅ redirect to dashboard
+            >
+              Cancel
+            </button>
+            <button
+              className="new-release-button"
+              onClick={() => alert("Submitted!")}
+            >
+              Submit
+            </button>
           </div>
         </div>
-      )}
+      </div>
 
       {/* Add Link Popup */}
       {showAddLinkPopup && (
@@ -187,10 +200,7 @@ The beat(s) are 100% self-produced & Original`;
               <button className="new-release-button" onClick={handleAddLink}>
                 Add Link
               </button>
-              <button
-                className="btn-secondary"
-                onClick={() => setShowAddLinkPopup(false)}
-              >
+              <button className="btn-secondary" onClick={() => setShowAddLinkPopup(false)}>
                 Cancel
               </button>
             </div>
@@ -215,10 +225,7 @@ The beat(s) are 100% self-produced & Original`;
               <button className="new-release-button" onClick={handleAttachFile}>
                 Attach File
               </button>
-              <button
-                className="btn-secondary"
-                onClick={() => setShowAttachFilePopup(false)}
-              >
+              <button className="btn-secondary" onClick={() => setShowAttachFilePopup(false)}>
                 Cancel
               </button>
             </div>

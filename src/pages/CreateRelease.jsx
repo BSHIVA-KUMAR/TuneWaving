@@ -40,6 +40,9 @@ function CreateRelease() {
 
   const [fileError, setFileError] = useState(""); // Add this state
 
+  const [hasUPC, setHasUPC] = useState(null);
+
+
   const openLinkProfileModal = (profile) => {
     setSelectedProfile(profile);
     setArtistProfileId("");
@@ -807,7 +810,7 @@ function CreateRelease() {
       {/* {step :5} */}
 
        <div className="section">
-        <h3>Duration</h3>
+        <h3>Date</h3>
         <div style={{display:"flex",gap:"30px" , marginLeft:"10%"}}>
            <div className="date-box">
                 <label>Digital Release Date <span style={{color:"red"}}>*</span></label>
@@ -835,14 +838,52 @@ function CreateRelease() {
         </div>
              
       {/* {step:6} */}
-      <div className="section">
-        <h3>UPC</h3>
-         <div className="input-group">
-          <label htmlFor="title" >UPC CODE <span style={{color:"red"}}>*</span> </label>
-          <input type="text" id="title" placeholder="Enter Your UPC Code" className="input-field" style={{width:"50%"}}  />
-        </div>
+     <div className="section">
+  <h3>UPC</h3>
+  <div className="input-group">
+    <label htmlFor="upc">
+      Do you have a UPC Code? <span style={{ color: "red" }}>*</span>
+    </label>
+    <div style={{ display: "flex", gap: "30px", marginTop: "8px" }}>
+      <label style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+        <input
+          type="radio"
+          name="upcOption"
+          value="yes"
+          onChange={() => setHasUPC("yes")}
+          checked={hasUPC === "yes"}
+        />
+        <span>Yes</span>
+      </label>
+      <label style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+        <input
+          type="radio"
+          name="upcOption"
+          value="no"
+          onChange={() => setHasUPC("no")}
+          checked={hasUPC === "no"}
+        />
+        <span>No</span>
+      </label>
+    </div>
+  </div>
 
-      </div>
+  {hasUPC === "yes" && (
+    <div className="input-group" style={{ marginTop: "15px" }}>
+      <label htmlFor="upcCode">
+        UPC Code <span style={{ color: "red" }}>*</span>
+      </label>
+      <input
+        type="text"
+        id="upcCode"
+        placeholder="Enter Your UPC Code"
+        className="input-field"
+        style={{ width: "50%" }}
+      />
+    </div>
+  )}
+</div>
+
 
     
       {/* Action Buttons */}
@@ -857,119 +898,3 @@ function CreateRelease() {
 }
 
 export default CreateRelease;
-//
-
-
-// import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-
-// import LocalizeReleaseModal from "../components/LocalizeReleaseModal";
-// import ProfileLinkBox from "../components/ProfileLinkBox";
-
-// import "../styles/CreateRelease.css";
-
-// function CreateRelease() {
-//   const navigate = useNavigate();
-//   const [showLocalizeModal, setShowLocalizeModal] = useState(false);
-
-//   const openLinkProfileModal = (platform) => {
-//     console.log("Link profile for", platform);
-//   };
-
-//   return (
-//     <div className="create-release-page">
-//       <h2 className="page-title">Create A New Release</h2>
-
-//       {/* Button to open Localize Modal */}
-//       <button className="btn-secondary" onClick={() => setShowLocalizeModal(true)}>
-//         Localize Your Release
-//       </button>
-
-//       {/* Profile Buttons Box */}
-//       <div className="profile-buttons-box">
-//         {["SoundCloud", "Spotify", "Apple Music"].map((platform) => (
-//           <ProfileLinkBox
-//             key={platform}
-//             platform={platform}
-//             onLinkClick={openLinkProfileModal}
-//           />
-//         ))}
-//       </div>
-
-//       {/* Your existing steps (upload, contributors, etc.) */}
-//       {/* ...keep everything else unchanged... */}
-
-//       {/* Localize Modal */}
-//       {showLocalizeModal && <LocalizeReleaseModal onClose={() => setShowLocalizeModal(false)} />}
-
-//       <div className="form-actions">
-//         <button className="btn-secondary" onClick={() => navigate("/")}>Cancel</button>
-//         <button className="btn-primary">Next</button>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default CreateRelease;
-
-
-
-
-
-
-
-// import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// // import LocalizeReleaseModal from "../components/LocalizeReleaseModal";
-// // import AddArtistModal from "../components/AddArtistModal";
-// // import ProfileLinkBox from "../components/ProfileLinkBox";
-// import "../styles/CreateRelease.css";
-// import LocalizeReleaseModal from "../components/LocalizeReleaseModal";
-// import AddArtistModal from "../components/AddArtistModal";
-// import ProfileLinkBox from "../components/ProfileLinkBox";
-
-// function CreateRelease() {
-//   const navigate = useNavigate();
-//   const [showLocalizeModal, setShowLocalizeModal] = useState(false);
-//   const [showAddArtistModal, setShowAddArtistModal] = useState(false);
-
-//   const openLinkProfileModal = (platform) => {
-//     console.log("Link profile for", platform);
-//   };
-
-//   return (
-//     <div className="create-release-page">
-//       <h2 className="page-title">Create A New Release</h2>
-
-//       <button className="btn-secondary" onClick={() => setShowLocalizeModal(true)}>
-//         Localize Your Release
-//       </button>
-
-//       <div className="contributors-buttons">
-//         <button className="btn-secondary" onClick={() => setShowAddArtistModal(true)}>
-//           + Add Artist / Performer
-//         </button>
-//       </div>
-
-//       {/* Add Artist Modal */}
-//       {showAddArtistModal && (
-//         <AddArtistModal
-//           onClose={() => setShowAddArtistModal(false)}
-//           onLinkClick={openLinkProfileModal}
-//         />
-//       )}
-
-//       {/* Localize Modal */}
-//       {showLocalizeModal && (
-//         <LocalizeReleaseModal onClose={() => setShowLocalizeModal(false)} />
-//       )}
-
-//       <div className="form-actions">
-//         <button className="btn-secondary" onClick={() => navigate("/")}>Cancel</button>
-//         <button className="btn-primary">Next</button>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default CreateRelease;

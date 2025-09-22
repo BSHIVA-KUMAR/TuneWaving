@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import CatalogPage from "./pages/CatalogPage.jsx";
@@ -16,10 +17,8 @@ import UploadTracks from "./pages/UploadTracks.jsx";
 import ReleaseForm from "./pages/ReleaseForm.jsx";
 import PreviewDistributePage from "./pages/PreviewDistributePage.jsx";
 import TrackDetails from "./pages/TrackDetails.jsx";
-import TicketRaisePage from "./pages/TicketRaisePage";
-// import YTServicesPage from "./pages/YTServicesPage";
+import TicketRaisePage from "./pages/TicketRaisePage.jsx";
 
-import "./App.css";
 
 function App() {
   return (

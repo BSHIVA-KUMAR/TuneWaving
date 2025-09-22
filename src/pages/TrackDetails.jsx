@@ -1,46 +1,34 @@
 import React, { useState } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/TrackDetails.css";
 
 const TrackDetails = () => {
-  // State for all input fields
-   const [lyricsLanguage, setLyricsLanguage] = useState("English");
-    const [lyricsLanguageOption, setLyricsLanguageOption] = useState("Select Language");
+  const [lyricsLanguage, setLyricsLanguage] = useState("");
+  const [lyricsLanguageOption, setLyricsLanguageOption] = useState("Select Language");
   const [catalogId, setCatalogId] = useState("");
-  const [crbtName, setCrbtName] = useState("");
-  const [crbtTime, setCrbtTime] = useState("00:00:00");
+  const [crbts, setCrbts] = useState([{ name: "", time: "00:00:00" }]); // CRBT rows
   const [isrcOption, setIsrcOption] = useState("no");
-  const [showPopup, setShowPopup] = useState(false);
   const [isrcCode, setIsrcCode] = useState("");
   const [explicitStatus, setExplicitStatus] = useState("");
+  const navigate = useNavigate();
 
-  // Add handlers for adding to arrays
-
-
-  // Example: Save handler (for demonstration)
-  const handleSave = () => {
-    const trackData = {
-      catalogId,
-      crbtName,
-      crbtTime,
-      isrcOption,
-      isrcCode,
-    };
-    console.log("Track Details:", trackData);
-    // You can send trackData to your backend or use as needed
-  };
-  const handleConfirmLeave = () => {
-    navigate("/dashboard");
+  // Add new CRBT row
+  const handleAddCrbt = () => {
+    setCrbts([...crbts, { name: "", time: "00:00:00" }]);
   };
 
-  const handleCancelLeave = () => {
-    setShowPopup(false);
+  // Delete CRBT row (but keep at least one)
+  const handleDeleteCrbt = (index) => {
+    if (crbts.length > 1) {
+      setCrbts(crbts.filter((_, i) => i !== index));
+    }
   };
 
-  const navigate = useNavigate()
-
-  const handleCloseClick = () => {
-    setShowPopup(true);
+  // Update CRBT field
+  const handleCrbtChange = (index, field, value) => {
+    const updatedCrbts = [...crbts];
+    updatedCrbts[index][field] = value;
+    setCrbts(updatedCrbts);
   };
 
   const handleSaveAndContinue = () => {
@@ -48,13 +36,11 @@ const TrackDetails = () => {
       lyricsLanguage,
       lyricsLanguageOption,
       catalogId,
-      crbtName,
-      crbtTime,
+      crbts,
       isrcOption,
       isrcCode,
       explicitStatus,
     };
-    // Save to local storage (append if already exists)
     const tracks = JSON.parse(localStorage.getItem("tracks") || "[]");
     tracks.push(trackData);
     localStorage.setItem("tracks", JSON.stringify(tracks));
@@ -65,364 +51,248 @@ const TrackDetails = () => {
     <div className="track-details-container">
       <h2 className="form-title">Track Details</h2>
 
+      {/* Language of Lyrics */}
+      <div className="language-container">
+        <div className="language-box">
+          <h3 className="section-title">Language of Lyrics</h3>
 
-         {/* {showPopup && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <p>Do you want to leave this page?</p>
-            <div className="popup-buttons">
-              <button className="yes-button" onClick={handleConfirmLeave}>
-                Yes
-              </button>
-              <button className="no-button" onClick={handleCancelLeave}>
-                No
-              </button>
-            </div>
+          <div className="radio-group" style={{ gap: "12px" }}>
+            <label>
+              <input
+                type="radio"
+                name="lyricsLanguageOption"
+                value="Select Language"
+                checked={lyricsLanguageOption === "Select Language"}
+                onChange={(e) => setLyricsLanguageOption(e.target.value)}
+              />
+              Select Language
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="lyricsLanguageOption"
+                value="Instrumental"
+                checked={lyricsLanguageOption === "Instrumental"}
+                onChange={(e) => setLyricsLanguageOption(e.target.value)}
+              />
+              Instrumental
+            </label>
           </div>
-        </div>
-      )} */}
 
-       {/* <span
-          className="close-button"
-          onClick={handleCloseClick}
-          style={{ fontSize: "24px", cursor: "pointer" }}
-        >
-          cancle
-        </span> */}
+          {/* Show language dropdown if "Select Language" */}
+          {lyricsLanguageOption === "Select Language" && (
+            <div style={{ marginTop: "15px" }}>
+              <select
+                value={lyricsLanguage}
+                onChange={(e) => setLyricsLanguage(e.target.value)}
+                style={{ marginTop: "10px" }}
+              >
+                <option value="" disabled>
+                  Select Language *
+                </option>
+                <option value="English">English</option>
+                <option value="Spanish">Spanish</option>
+                <option value="French">French</option>
+                <option value="German">German</option>
+              </select>
 
-      <div className="form-card">
-        {/* Title Section */}
-        {/* <div className="form-section">
-          <h3 className="section-title">Title</h3>
-          <label className="input-label">
-            Track Title <span className="required">*</span>
-            <input
-              type="text"
-              placeholder="e.g. I got my summer"
-              className="form-input"
-              value={trackTitle}
-              onChange={e => setTrackTitle(e.target.value)}
-            />
-          </label>
+              {/* Explicit Content radio buttons */}
+              {lyricsLanguage && (
+                <div
+                  className="language-container"
+                  style={{
+                    flexDirection: "column",
+                    padding: "20px",
+                    gap: "15px",
+                    marginTop: "20px",
+                  }}
+                >
+                  <div className="language-box">
+                    <div className="section-title">Explicit Content *</div>
 
-          <label className="input-label">
-            Title Version
-            <input
-              type="text"
-              placeholder="e.g. Live, Remix, Remastered"
-              className="form-input"
-              value={titleVersion}
-              onChange={e => setTitleVersion(e.target.value)}
-            />
-          </label>
+                    <div
+                      className="radio-group"
+                      style={{ flexDirection: "column", gap: "12px" }}
+                    >
+                      <label>
+                        <input
+                          type="radio"
+                          name="explicitStatus"
+                          value="Explicit"
+                          checked={explicitStatus === "Explicit"}
+                          onChange={() => setExplicitStatus("Explicit")}
+                        />
+                        Explicit
+                      </label>
+                      {explicitStatus === "Explicit" && (
+                        <p style={{ fontSize: "13px", color: "#555", marginLeft: "20px", marginTop: "4px" }}>
+                          The track lyrics or title include explicit language (such as drug references, sexual, violent or discriminatory language, swearing etc.) not suitable for children.
+                        </p>
+                      )}
 
-          <button className="localize-btn">Localize Your Release</button>
+                      <label>
+                        <input
+                          type="radio"
+                          name="explicitStatus"
+                          value="Not Explicit"
+                          checked={explicitStatus === "Not Explicit"}
+                          onChange={() => setExplicitStatus("Not Explicit")}
+                        />
+                        Not Explicit
+                      </label>
+                      {explicitStatus === "Not Explicit" && (
+                        <p style={{ fontSize: "13px", color: "#555", marginLeft: "20px", marginTop: "4px" }}>
+                          The track does NOT include any explicit language in lyrics or title.
+                        </p>
+                      )}
 
-          <div className="tip-box">
-            <strong>Tips:</strong> Do not include version information like Remix
-            or Uncut in the main Title field. Use the Title Version field
-            instead.
-          </div>
-        </div> */}
+                      <label>
+                        <input
+                          type="radio"
+                          name="explicitStatus"
+                          value="Cleaned"
+                          checked={explicitStatus === "Cleaned"}
+                          onChange={() => setExplicitStatus("Cleaned")}
+                        />
+                        Cleaned
+                      </label>
+                      {explicitStatus === "Cleaned" && (
+                        <p style={{ fontSize: "13px", color: "#555", marginLeft: "20px", marginTop: "4px" }}>
+                          Cleaned
+                        </p>
+                      )}
+                    </div>
 
-        {/* language-container */}
-
-         <div className="language-container">
-              <div className="language-box">
-                <h3 className="section-title">Language of Lyrics</h3>
-
-                <div className="radio-group" style={{ gap: "12px" }}>
-                  <label>
-                    <input
-                      type="radio"
-                      name="lyricsLanguageOption"
-                      value="Select Language"
-                      checked={lyricsLanguageOption === "Select Language"}
-                      onChange={(e) => setLyricsLanguageOption(e.target.value)}
-                    />
-                    Select Language
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="lyricsLanguageOption"
-                      value="Instrumental"
-                      checked={lyricsLanguageOption === "Instrumental"}
-                      onChange={(e) => setLyricsLanguageOption(e.target.value)}
-                    />
-                    Instrumental
-                  </label>
+                    {/* General tip below all radio buttons */}
+                    <p
+                      className="explicit-tip"
+                      style={{ marginTop: "12px", fontSize: "13px", color: "#555" }}
+                    >
+                      If your track contains explicit content, such as drug references, discriminatory language, swearing etc. then you MUST mark it as “Explicit”. If you don’t do this, your release may be rejected when you attempt to distribute it.
+                    </p>
+                  </div>
                 </div>
-
-                {lyricsLanguageOption === "Select Language" && (
-                  <select
-                    value={lyricsLanguage}
-                    onChange={(e) => setLyricsLanguage(e.target.value)}
-                    style={{ marginTop: "10px" }}
-                  >
-                    <option value="" disabled selected>Select Language *</option>
-                    <option value="English">English</option>
-                    <option value="Spanish">Spanish</option>
-                    <option value="French">French</option>
-                    <option value="German">German</option>
-                  </select>
-                )}
-              </div>
-            </div>
-
-             {lyricsLanguageOption === "Instrumental" && (
-          <div
-            className="language-container"
-            style={{
-              flexDirection: "column",
-              padding: "20px",
-              gap: "15px",
-              marginTop: "20px",
-            }}
-          >
-            <div className="language-box">
-              <div className="section-title">Explicit Content *</div>
-
-              <div className="radio-group" style={{ flexDirection: "column", gap: "12px" }}>
-                <label>
-                  <input
-                    type="radio"
-                    name="explicitStatus"
-                    value="Explicit"
-                    checked={explicitStatus === "Explicit"}
-                    onChange={() => setExplicitStatus("Explicit")}
-                  />
-                  Explicit
-                </label>
-                {explicitStatus === "Explicit" && (
-                  <p style={{ fontSize: "13px", color: "#555", marginLeft: "20px", marginTop: "4px" }}>
-                    The track lyrics or title include explicit language (such as drug references, sexual, violent or discriminatory language, swearing etc.) not suitable for children.
-                  </p>
-                )}
-
-                <label>
-                  <input
-                    type="radio"
-                    name="explicitStatus"
-                    value="Not Explicit"
-                    checked={explicitStatus === "Not Explicit"}
-                    onChange={() => setExplicitStatus("Not Explicit")}
-                  />
-                  Not Explicit
-                </label>
-                {explicitStatus === "Not Explicit" && (
-                  <p style={{ fontSize: "13px", color: "#555", marginLeft: "20px", marginTop: "4px" }}>
-                    The track does NOT include any explicit language in lyrics or title.
-                  </p>
-                )}
-              </div>
-
-              <p
-                className="explicit-note"
-                style={{ marginTop: "12px", fontSize: "13px", color: "#555" }}
-              >
-                If your track contains explicit content, you MUST mark it as “Explicit”. Otherwise, your release may be rejected when you attempt to distribute it.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Artists Section */}
-        {/* <div className="form-section">
-          <h3 className="section-title">Artists</h3>
-          <div className="button-group">
-            <div>
-              <button className="add-btn" type="button" onClick={handleAddMainArtist}>
-                + Add Main Primary Artist
-              </button>
-              {mainArtists.length > 0 && (
-                <ul>
-                  {mainArtists.map((artist, idx) => (
-                    <li key={idx}>{artist}</li>
-                  ))}
-                </ul>
               )}
             </div>
-            <div>
-             
-              <button className="add-btn" type="button" onClick={handleAddPerformer}>
-                + Add Performer
-              </button>
-              {performers.length > 0 && (
-                <ul>
-                  {performers.map((performer, idx) => (
-                    <li key={idx}>{performer}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <div>
-              
-              <button className="add-btn" type="button" onClick={handleAddArtistCredit}>
-                + Add Artist Credit
-              </button>
-              {artistCredits.length > 0 && (
-                <ul>
-                  {artistCredits.map((credit, idx) => (
-                    <li key={idx}>{credit}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <div>
-              <button className="add-btn">+ Add Artist</button>
-            </div>
-            <div>
-             
-              <button className="add-btn">+ Add Credit</button>
-            </div>
-          </div>
-          <div className="tip-box">
-            <strong>Tips:</strong> Apple does not allow changes to Artist Name
-            and Artist ID after initial submission. Make sure these are correct
-            before you save.
-          </div>
-        </div> */}
-
-        {/* Genres Section */}
-        {/* <div className="form-section">
-          <h3 className="section-title">Genres</h3>
-          <div className="genre-row">
-            <div className="genre-field">
-              <label>
-                Primary Genre <span className="required">*</span>
-              </label>
-              <select
-                className="form-input"
-                value={primaryGenre}
-                onChange={e => setPrimaryGenre(e.target.value)}
-              >
-                <option value="">Select Genre</option>
-                <option>Pop</option>
-                <option>Rock</option>
-                <option>Hip Hop</option>
-                <option>Jazz</option>
-              </select>
-            </div>
-            <div className="genre-field">
-              <label>
-                Secondary Genre <span className="required">*</span>
-              </label>
-              <select
-                className="form-input"
-                value={secondaryGenre}
-                onChange={e => setSecondaryGenre(e.target.value)}
-              >
-                <option value="">Select Genre</option>
-                <option>Electronic</option>
-                <option>Classical</option>
-                <option>Reggae</option>
-                <option>Country</option>
-              </select>
-            </div>
-          </div>
-        </div> */}
-
-        {/* Catalog ID */}
-        <div className="form-section">
-          <h3 className="section-title">Catalog ID</h3>
-          <input
-            type="text"
-            placeholder="e.g. A12345"
-            className="form-input"
-            value={catalogId}
-            onChange={e => setCatalogId(e.target.value)}
-          />
-          <div className="tip-box">
-            <strong>Tips:</strong> Best to leave blank unless you really need
-            these. Must be unique for each track.
-          </div>
+          )}
         </div>
+      </div>
 
-        {/* CRBT Section */}
-        <div className="form-section">
-          <h3 className="section-title">Add CRBT</h3>
-          <div className="crbt-row">
+      {/* Catalog ID */}
+      <div className="form-section">
+        <h3 className="section-title">Catalog ID</h3>
+        <input
+          type="text"
+          placeholder="e.g. A12345"
+          className="form-input"
+          value={catalogId}
+          onChange={(e) => setCatalogId(e.target.value)}
+        />
+        <div className="tip-box">
+          <strong>Tips:</strong> Best to leave blank unless you really need these. Must be unique for each track.
+        </div>
+      </div>
+
+      {/* CRBT Section */}
+      <div className="form-section">
+        <h3 className="section-title">Add CRBT</h3>
+
+        {crbts.map((crbt, index) => (
+          <div
+            className="crbt-row"
+            key={index}
+            style={{ display: "flex", gap: "10px", marginBottom: "10px" }}
+          >
             <input
               type="text"
               placeholder="Enter CRBT Name"
               className="form-input"
-              value={crbtName}
-              onChange={e => setCrbtName(e.target.value)}
+              value={crbt.name}
+              onChange={(e) => handleCrbtChange(index, "name", e.target.value)}
             />
             <input
               type="text"
-              value={crbtTime}
+              value={crbt.time}
               className="form-input"
-              onChange={e => setCrbtTime(e.target.value)}
+              onChange={(e) => handleCrbtChange(index, "time", e.target.value)}
+            />
+
+            {/* Delete only for extra rows */}
+            {index > 0 && (
+              <button
+                type="button"
+                className="delete-btn"
+                onClick={() => handleDeleteCrbt(index)}
+                style={{
+                  background: "red",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "6px",
+                  padding: "6px 10px",
+                  cursor: "pointer",
+                }}
+              >
+                🗑
+              </button>
+            )}
+          </div>
+        ))}
+
+        <button className="add-btn" type="button" onClick={handleAddCrbt}>
+          + Add CRBT
+        </button>
+      </div>
+
+      {/* ISRC Section */}
+      <div className="form-section">
+        <h3 className="section-title">
+          Do you have an ISRC for this recording? <span className="required">*</span>
+        </h3>
+        <div className="radio-group">
+          <label className={`radio-btn ${isrcOption === "no" ? "active" : ""}`}>
+            <input
+              type="radio"
+              name="isrc"
+              value="no"
+              checked={isrcOption === "no"}
+              onChange={() => setIsrcOption("no")}
+            />
+            No
+          </label>
+          <label className={`radio-btn ${isrcOption === "yes" ? "active" : ""}`}>
+            <input
+              type="radio"
+              name="isrc"
+              value="yes"
+              checked={isrcOption === "yes"}
+              onChange={() => setIsrcOption("yes")}
+            />
+            Yes
+          </label>
+        </div>
+
+        <div className="tip-box">
+          <strong>Info:</strong> An ISRC is a unique code that every track must have. If you don’t already have one, we will generate one for you (free). Note: ISRC is unique to each song.
+        </div>
+
+        {isrcOption === "yes" && (
+          <div>
+            <input
+              type="text"
+              placeholder="Enter ISRC Code *"
+              className="form-input"
+              value={isrcCode}
+              onChange={(e) => setIsrcCode(e.target.value)}
             />
           </div>
-          <button className="add-btn">+ Add CRBT</button>
-        </div>
+        )}
+      </div>
 
-        {/* ISRC Section */}
-        <div className="form-section">
-          <h3 className="section-title">
-            Do you have an ISRC for this recording? <span className="required">*</span>
-          </h3>
-          <div className="radio-group">
-            <label
-              className={`radio-btn ${isrcOption === "no" ? "active" : ""}`}
-            >
-              <input
-                type="radio"
-                name="isrc"
-                value="no"
-                checked={isrcOption === "no"}
-                onChange={() => setIsrcOption("no")}
-              />
-              No
-            </label>
-            <label
-              className={`radio-btn ${isrcOption === "yes" ? "active" : ""}`}
-            >
-              <input
-                type="radio"
-                name="isrc"
-                value="yes"
-                checked={isrcOption === "yes"}
-                onChange={() => setIsrcOption("yes")}
-              />
-              Yes
-            </label>
-          </div>
-
-          <div className="tip-box">
-            <strong>Info:</strong> An ISRC is a unique code that every track
-            must have. If you don’t already have one, we will generate one for
-            you (free). Note: ISRC is unique to each song, you should never
-            create a new ISRC for a song that already has an ISRC.
-          </div>
-
-          {isrcOption === "yes" && (
-            <div>
-              <input
-                type="text"
-                placeholder="A1234..."
-                className="form-input"
-                value={isrcCode}
-                onChange={e => setIsrcCode(e.target.value)}
-              />
-              <p className="info-text">
-                Enter a code only if you already have one. Otherwise one will be
-                generated when you distribute and it will be displayed on your
-                track’s info page.
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Save Button */}
-        <div className="form-actions">
-          <button className="new-release-button" onClick={handleSaveAndContinue}>
-            Save & Continue
-          </button>
-        </div>
+      {/* Save Button */}
+      <div className="form-actions">
+        <button className="new-release-button" onClick={handleSaveAndContinue}>
+          Save & Continue
+        </button>
       </div>
     </div>
   );

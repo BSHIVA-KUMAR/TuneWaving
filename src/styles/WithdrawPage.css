@@ -1,34 +1,3 @@
-/* Full-Page Modal Container */
-/* .withdraw-modal {
-  background: #fff;
-  border-radius: 12px;
-  width: 95vw;             
-  max-width: 1200px;      
-  height: 90vh;            
-  margin: 20px auto;      \
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  border: 1px solid #ddd;
-} */
-
-/* Withdraw Page Container */
-/* .withdraw-modal {
-  background: #fff;
-  width: 100%;             
-  min-height: 100vh;      
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: none;        
-  border: none;          
-  border-radius: 0;        /* Remove rounding 
-  margin: 0;
-  padding: 0;
-} */
-
-
 .withdraw-modal {
   background: #fff;
   width: 100%;
@@ -45,31 +14,6 @@
 }
 
 
-
-
-
-
-
-/* 
-
-
-/* Sticky Header with subtle gradient */
-/* .withdraw-header {
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 25px;
-  /* background: linear-gradient(90deg, #1278BB 5%, #13A89E 105%); 
-  color: #000;
-  border-bottom: 1px solid #ccc;
-  position: sticky;         /* keeps header at top 
-  top: 0;
-  z-index: 10;
-  flex-shrink: 0;
-  border-radius: 12px 12px 0 0;
-  /* box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
-} */ 
 
 .withdraw-header {
   width: 1320px;
@@ -95,19 +39,6 @@
   color: #000 !important;
 }
 
-
-/* .confirm-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  text-align: center;
-  z-index: 100;
-} */
 
 ./* Overlay covering entire screen */
 .confirm-popup {

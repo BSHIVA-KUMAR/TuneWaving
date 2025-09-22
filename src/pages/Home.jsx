@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 import SampleIcon from "../assets/samplIcon.png";
-
+import live from "../assets/Live.svg"
 function Home() {
   const navigate = useNavigate();
 
@@ -17,14 +17,17 @@ function Home() {
   // Dynamic Cards Data
   const cardsData = [
     {
+      heading:"Account Balance",
       value: "$300.29",
       meta: "Account Balance <br/> Approx ₹25,093.12",
     },
     {
+      heading:"Last Statement",
       value: "$300.29",
       meta: "May 2024 <br/> Orpin Music",
     },
     {
+      heading:"Last Payout",
       value: "$300.29",
       meta: "May 23, 2024 <br/> ₹25,093.12",
     },
@@ -62,12 +65,15 @@ function Home() {
       <div className="cards">
         {cardsData.map((card, idx) => (
           <div key={idx} className="card">
-            <div className="value">{card.value}</div>
+            <h3>{card.heading}</h3>
+            <div className="second-card">
+               <div className="value">{card.value}</div>
             <div
               className="meta"
               dangerouslySetInnerHTML={{ __html: card.meta }}
             />
           </div>
+              </div>
         ))}
       </div>
 
@@ -86,13 +92,14 @@ function Home() {
         {releases.map((release, i) => (
           <div key={i} className="release-card">
             <div className="album-art">
+              <div className="live-tag"><img style={{height:"10px",width:"11px",marginRight:"5px",marginTop:"1px"}} src={live}/>Live</div>
               <img src={release.img} alt={release.title} />
               <div className="overlay">
                 <button className="play-btn">▶</button>
               </div>
             </div>
-            <div className="title">{release.title}</div>
-            <div className="subtitle">{release.subtitle}</div>
+            <div className="title" style={{textAlign:"left",paddingLeft:"10px"}}>{release.title}</div>
+            <div className="subtitle" style={{textAlign:"left",paddingLeft:"10px"}}>{release.subtitle}</div>
           </div>
         ))}
       </div>

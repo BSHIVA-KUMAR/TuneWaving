@@ -298,3 +298,58 @@
 }
 
 
+.balance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.withdraw-btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(90.61deg, #1278BB 4.69%, #13A89E 103.09%);
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.withdraw-btn:hover {
+  opacity: 0.9;
+}
+
+
+.three-dots {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+.dropdown-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.dropdown-btn:hover {
+  background-color: #f0f0f0;
+}

@@ -76,6 +76,15 @@
   padding: 6px 12px;
 }
 
+.catalog-icons img {
+  width: 24px;   /* change to any size you want */
+  height: 24px;  /* keep equal for square icons */
+  object-fit: contain; /* makes sure it scales without distortion */
+  cursor: pointer;
+  /* background-color: NONE; */
+}
+
+
 .catalog-icons .create-release {
   background: #1e40af;
   color: #fff;
@@ -481,4 +490,39 @@
     bottom: auto;
     flex: 1;
   }
+}
+
+
+
+/* Download csv / xls */
+.download-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.download-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.download-menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.download-menu button:hover {
+  background: #f3f3f3;
 }

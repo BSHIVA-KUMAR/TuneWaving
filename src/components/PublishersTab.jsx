@@ -1,12 +1,12 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DataTable from "./DataTable";
 import GridView from "./GridView";
 import CopyButton from "./CopyButton";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 
-function PublishersTab({searchTerm,showMode}) {
+function PublishersTab({searchTerm, showMode, setTableData, onSelectionChange}) {
 
   const publishersData = [
     {
@@ -124,14 +124,16 @@ function PublishersTab({searchTerm,showMode}) {
         item.country.toLowerCase().includes(searchTerm?.toLowerCase() || "")
       );
 
-      console.log("Search Term:", searchTerm);
-      console.log("Filtered Data:", filteredData);
-
+      // console.log("Search Term:", searchTerm);
+      // console.log("Filtered Data:", filteredData);
+        useEffect(() => {
+        setTableData(filteredData);
+      } , [filteredData, setTableData]);  
 
   return (
     <div className="publishers-tab">
       {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
       } 
     </div>
   );

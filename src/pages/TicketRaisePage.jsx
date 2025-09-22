@@ -9,10 +9,6 @@ const TicketPage = () => {
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [showDetail, setShowDetail] = useState(false); // controls detail view
 
-  const handleClose = () => {
-    navigate("/dashboard");
-  };
-
   const tickets = [
     {
       ticketNo: "TW12342025",
@@ -41,9 +37,28 @@ const TicketPage = () => {
   return (
     <div className="ticket-page">
       <div className="ticket-container">
-        <button className="close-btn" onClick={handleClose}>
-          &times;
-        </button>
+        {/* Top-left back symbol */}
+        <span
+          className="back-button"
+          onClick={() => {
+            if (showDetail) {
+              setShowDetail(false); // go back to ticket selection
+              setSelectedTicket(null); // deselect ticket
+            } else {
+              navigate(-1); // go back to previous page (front page)
+            }
+          }}
+          style={{
+            position: "absolute",
+            left: "20px",
+            top: "20px",
+            cursor: "pointer",
+            fontSize: "24px",
+            fontWeight: "bold",
+          }}
+        >
+          ⏴
+        </span>
 
         <h2>Tickets</h2>
 
@@ -91,7 +106,7 @@ const TicketPage = () => {
               <input type="file" />
             </label>
 
-            <button type="submit" className="submit-btn">
+            <button type="submit" className="new-release-button" style={{ width:"100Px" , marginLeft:"40%" }}>
               Submit
             </button>
           </form>
@@ -153,7 +168,7 @@ const TicketPage = () => {
             {selectedTicket && (
               <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
                 <button
-                  className="submit-btn"
+                  className="new-release-button" style={{ width:"100Px"  }}
                   onClick={() => setShowDetail(true)}
                 >
                   Next
@@ -189,7 +204,7 @@ const TicketPage = () => {
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <button
-                className="submit-btn"
+                className="new-release-button" style={{ width:"100Px"  }}
                 onClick={() => {
                   setShowDetail(false);
                   setSelectedTicket(null); // go back to ticket list

@@ -1,12 +1,12 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "./DataTable";
 import CopyButton from "./CopyButton";
 import "../styles/TracksTab.css";
 import "../styles/TabComponents.css";
 import "../styles/TableShared.css";
 import GridView from "./GridView";
-function TracksTab({searchTerm, showMode}) {
+function TracksTab({searchTerm, showMode, setTableData, onSelectionChange}) {
 
 
   const tracksData = [
@@ -45,12 +45,15 @@ function TracksTab({searchTerm, showMode}) {
     (item) =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) 
   );
-  console.log("Filtered Data:", filteredData);
+  // console.log("Filtered Data:", filteredData);
+  useEffect(() => {
+    setTableData(filteredData);
+  } , [filteredData, setTableData]);
 
   return (
     <div className="tracks-tab">
       {
-       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} />
+       showMode==="grid" ? <GridView data={filteredData} /> :  <DataTable data={filteredData} columns={columns} onSelectionChange={onSelectionChange} />
       } 
     </div>
   );

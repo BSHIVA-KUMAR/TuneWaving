@@ -2,6 +2,7 @@
 /* Greeting Section */
 .home-container {
   padding: 30px 60px;
+  margin-top: 50px;
   font-family: "Poppins", sans-serif;
   background: #f9fafb;
 
@@ -80,11 +81,37 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
 }
 
+.second-card{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
 /* Hover effect for all cards */
 .card:hover {
   border: 2px solid #1e40af;
+  background-color:#edeff4;
   box-shadow: 0 0 10px rgba(30,64,175,0.5);
   transform: translateY(-4px);
+}
+
+.live-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  background: linear-gradient(92.99deg, #1278BB 3.3%, #13A89E 100%);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-left: 40%;
+  width: auto;
+}
+
+.live-tag img {
+  height: 10px;
+  width: 10px;
 }
 
 /* Default active card (second card) */

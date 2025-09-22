@@ -162,3 +162,50 @@
   color: #fff;
   border-radius: 999px; /* stays pill on hover */
 }
+
+/* Submit button  */
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+  color: #1178BB;
+  border: 2px solid transparent;
+  border-radius: 999px; /* ensures perfect pill shape */
+  background-image: linear-gradient(#fff, #fff), 
+                    linear-gradient(93.93deg, #1178BB -5.69%, #15A79F 107.1%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover + Active State with animated gradient */
+/* Hover + Active with animated gradient fill */
+.btn-submit:hover,
+.btn-submit:active {
+  background: linear-gradient(92.99deg, #0D5C99 3.3%, #0FA08F 100%);
+  background-size: 300% 300%;
+  background-position: 0% 50%;
+  animation: slidebg 4s linear infinite;
+  color: #fff;
+  border-radius: 999px;
+  border: none; /* solid fill look on hover */
+}
+
+/* Keyframes for sliding gradient effect */
+@keyframes slidebg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

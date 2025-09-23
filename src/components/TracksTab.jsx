@@ -53,9 +53,7 @@ function TracksTab({searchTerm, showMode, setTableData, onSelectionChange}) {
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) 
   );
   // console.log("Filtered Data:", filteredData);
-  useEffect(() => {
-    setTableData(filteredData);
-  } , [filteredData, setTableData]);
+  
 
   return (
     <div className="tracks-tab">

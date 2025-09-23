@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Eye, EyeOff, Edit2, X } from 'lucide-react';
+import { Eye, EyeOff, Edit2, X, XCircle } from 'lucide-react';
 import '../styles/Settings.css';
 
+import { useNavigate } from 'react-router-dom'; 
+
 const Settings = ({ user, setUser }) => {
+  const navigate = useNavigate();
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -127,7 +130,13 @@ const Settings = ({ user, setUser }) => {
       {/* User Info Card */}
       <div className="user-info-card">
         <div className="card-header">
-          <h2>User Info</h2>
+          <h2>User Info</h2> 
+        <button 
+    className="secondary-btn close-btn" 
+    onClick={() => navigate("/")}
+  >
+    <X size={20} />
+  </button>
         </div>
 
         <div className="user-profile-section">
@@ -256,7 +265,7 @@ const Settings = ({ user, setUser }) => {
           </div>
 
           <div className="form-actions">
-            <button onClick={handleSaveChanges} className="save-changes-btn">
+            <button onClick={handleSaveChanges} className="new-release-button">
               Save Changes
             </button>
           </div>

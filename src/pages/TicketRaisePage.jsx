@@ -60,7 +60,7 @@ const TicketPage = () => {
           ⏴
         </span>
 
-        <h2>Tickets</h2>
+        <h2 style={{textAlign:"center"}}>Tickets</h2>
 
         {/* Tabs */}
         <div className="ticket-tabs">
@@ -84,7 +84,9 @@ const TicketPage = () => {
         {activeTab === "raise" && (
           <form className="ticket-form" onSubmit={(e) => e.preventDefault()}>
             <label>
-              Issue Type <span className="required">*</span>
+              <div>
+                Issue Type <span className="required">*</span>
+                </div>
               <select required>
                 <option value="" disabled>
                   Select issue type
@@ -97,7 +99,11 @@ const TicketPage = () => {
             </label>
 
             <label>
-              Description <span className="required">*</span>
+              <div>
+                 Description <span className="required">*</span>
+
+              </div>
+             
               <textarea placeholder="Enter your issue" required />
             </label>
 
@@ -207,7 +213,8 @@ const TicketPage = () => {
                 className="new-release-button" style={{ width:"100Px"  }}
                 onClick={() => {
                   setShowDetail(false);
-                  setSelectedTicket(null); // go back to ticket list
+                  setSelectedTicket(null);
+                  navigate("/") 
                 }}
               >
                 Close

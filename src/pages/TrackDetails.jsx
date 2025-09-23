@@ -57,13 +57,14 @@ const TrackDetails = () => {
           <h3 className="section-title">Language of Lyrics</h3>
 
           <div className="radio-group" style={{ gap: "12px" }}>
-            <label>
+            <label style={{gap:"10px"}}>
               <input
                 type="radio"
                 name="lyricsLanguageOption"
                 value="Select Language"
                 checked={lyricsLanguageOption === "Select Language"}
                 onChange={(e) => setLyricsLanguageOption(e.target.value)}
+                style={{width:"20px",marginTop:"10px"}}
               />
               Select Language
             </label>
@@ -74,6 +75,8 @@ const TrackDetails = () => {
                 value="Instrumental"
                 checked={lyricsLanguageOption === "Instrumental"}
                 onChange={(e) => setLyricsLanguageOption(e.target.value)}
+                style={{width:"20px",marginTop:"10px"}}
+                
               />
               Instrumental
             </label>
@@ -277,6 +280,7 @@ const TrackDetails = () => {
 
         {isrcOption === "yes" && (
           <div>
+            <label>Enter Your ISRC Code</label>
             <input
               type="text"
               placeholder="Enter ISRC Code *"

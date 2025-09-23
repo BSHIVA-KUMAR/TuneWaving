@@ -30,14 +30,18 @@
 /* Cross button at top-right (only for the main container) */
 .close-button {
   position: absolute;
+  text-align: center;
   top: 20px;
   right: 20px;
+  height: fit-content;
   background: #f1f1f1;
   border: none;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   color: #555;
-  padding: 6px 10px;
+  
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;

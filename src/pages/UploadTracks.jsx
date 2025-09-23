@@ -136,7 +136,7 @@ const UploadTracks = () => {
         )}
         {tracks.length < 1 && <p style={{ color: "red" }}>Please upload at least one track.</p>}
 
-        <button className="new-release-button next-btn" onClick={handleNextStep} disabled={tracks.length < 1}>
+        <button className="new-release-button " style={{marginLeft:"40%",marginTop:"10px"}}  onClick={handleNextStep} >
           Next
         </button>
       </div>
@@ -145,3 +145,5 @@ const UploadTracks = () => {
 };
 
 export default UploadTracks;
+
+// disabled={tracks.length < 1}

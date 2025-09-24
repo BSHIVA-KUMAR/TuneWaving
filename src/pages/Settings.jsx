@@ -119,12 +119,12 @@ const Settings = ({ user, setUser }) => {
 
       {/* Header */}
       <div className="settings-header">
-        <h1 className="settings-title">
+        {/* <h1 className="settings-title">
           Welcome, {formData.firstName} {formData.lastName}
-        </h1>
-        <button className="close-btn">
+        </h1> */}
+        {/* <button className="close-btn">
           <X size={20} />
-        </button>
+        </button> */}
       </div>
 
       {/* User Info Card */}

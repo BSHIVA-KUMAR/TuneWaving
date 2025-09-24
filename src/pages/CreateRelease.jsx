@@ -124,10 +124,10 @@ function CreateRelease() {
       <input type="text" placeholder="Optional" className="input-field" />
 
       <div className="button-group">
-        <button className="cancel-btn" onClick={() => setShowLocalizeModal(false)}>
+        <button className="btn-secondary" onClick={() => setShowLocalizeModal(false)}>
           Cancel
         </button>
-        <button className="apply-btn" onClick={() => setShowLocalizeModal(false)}>
+        <button className="new-release-button" onClick={() => setShowLocalizeModal(false)}>
           Apply
         </button>
       </div>
@@ -763,7 +763,7 @@ function CreateRelease() {
             </p>
 
             <div className="button-group">
-              <button className="cancel-btn" onClick={() => setShowLinkProfileModal(false)}>
+              <button className="btn-secondary" onClick={() => setShowLinkProfileModal(false)}>
                 Cancel
               </button>
               <button className="new-release-button" onClick={() => setShowLinkProfileModal(false)}>

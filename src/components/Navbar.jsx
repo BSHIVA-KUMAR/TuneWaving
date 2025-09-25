@@ -270,7 +270,7 @@ const Navbar = () => {
   <button
     className="logout-btn-profile"
     onClick={() => {
-      localStorage.removeItem("isLoggedIn"); // clear login
+      localStorage.removeItem("jwtToken"); // clear login
       setProfileOpen(false);                 // close dropdown
       navigate("/login");                    // redirect to login
     }}
